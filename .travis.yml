@@ -7,4 +7,4 @@ os:
 script: cmake . && make
 before_install:
     - brew update
-    - brew install boost --with-python SDL2 SDL2_image SDL2_ttf
+    - travis_wait brew install boost --with-python SDL2 SDL2_image SDL2_ttf
