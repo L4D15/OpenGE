@@ -4,11 +4,13 @@
 using namespace std;
 
 // Static initialization
-bool Game::instantiated = false;
-bool Game::run = false;
-Window* Game::window = NULL;
-Time* Game::time = NULL;
-Settings* Game::settings = NULL;
+bool 			Game::instantiated 	= false;
+bool 			Game::run 			= false;
+Window* 		Game::window 		= NULL;
+Time* 			Game::time 			= NULL;
+Settings* 		Game::settings 		= NULL;
+EventManager* 	Game::eventManager 	= NULL;
+Input*			Game::input 		= NULL;
 // ---
 
 Game::Game()
@@ -85,6 +87,12 @@ void Game::InitializeSettings()
 	settings = new Settings();
 }
 
+void Game::InitializeEventManagement()
+{
+	eventManager = new EventManager();
+	input = new Input();
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
@@ -110,7 +118,7 @@ void Game::MainLoop()
 
 void Game::HandleEvents()
 {
-
+	eventManager->ProcessEvents();
 }
 
 void Game::Update()
@@ -125,6 +133,11 @@ void Game::Render()
 	// Draw stuff
 
 	window->Draw();
+}
+
+void Game::Terminate()
+{
+	run = false;
 }
 
 void Game::Log(string text, bool endLine)

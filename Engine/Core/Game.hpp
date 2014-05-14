@@ -5,6 +5,8 @@
 #include "Engine/Core/Window.hpp"
 #include "Engine/Core/Time.hpp"
 #include "Engine/Core/Settings.hpp"
+#include "Engine/Core/EventManager.hpp"
+#include "Engine/Core/Input.hpp"
 #include <string>
 
 using namespace std;
@@ -15,33 +17,37 @@ public:
 	Game();
 	~Game();
 
-	void				Start();
-	void				MainLoop();
-	void				HandleEvents();
-	void				Update();
-	void				Render();
+	void					Start();
+	void					MainLoop();
+	void					HandleEvents();
+	void					Update();
+	void					Render();
 
-	static void			Log(string text, bool endLine = true);
+	static void				Terminate();
+	static void				Log(string text, bool endLine = true);
 
 private:
-	void				InitializeLibraries();
-	void				InitializeWindow();
-	void				InitializeTime();
-	void				InitializeSettings();
+	void					InitializeLibraries();
+	void					InitializeWindow();
+	void					InitializeTime();
+	void					InitializeSettings();
+	void					InitializeEventManagement();
 
 protected:
-	string				name;
+	string					name;
 
 // Static variables
 
 protected:
-	static bool			instantiated;
-	static bool			run;
+	static bool				instantiated;
+	static bool				run;
 
 public:
-	static Window*		window;
-	static Time*		time;
-	static Settings*	settings;
+	static Window*			window;
+	static Time*			time;
+	static Settings*		settings;
+	static EventManager* 	eventManager;
+	static Input*			input;
 	
 };
 
