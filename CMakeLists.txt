@@ -5,6 +5,8 @@ cmake_minimum_required(VERSION 2.6)
 # ============================================================================= #
 
 
+
+
 # ============================================================================= #
 # Project Properties
 # ============================================================================= #
@@ -23,7 +25,7 @@ cmake_policy(SET CMP0009 NEW)
 # ============================================================================= #
 # Source Files
 # ============================================================================= #
-file(GLOB_RECURSE ENGINE_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Engine/*.cpp")
+file(GLOB_RECURSE ENGINE_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
 file(GLOB_RECURSE GAME_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/*.cpp")
 
 # ============================================================================= #
@@ -68,6 +70,17 @@ set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
 find_package(Boost REQUIRED system filesystem python)
 
+# Artemis-Cpp
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp/include")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp")
+
+# json-spirit
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/include")
+set(JSON_SPIRIT_LIBRARY_TYPE STATIC)
+set(JSON_SPIRIT_BUILD_DEMOS FALSE)
+set(JSON_SPIRIT_BUILD_TESTS FALSE)
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/build")
+
 # ============================================================================= #
 # Resources
 # ============================================================================= #
@@ -109,5 +122,7 @@ target_link_libraries(${PROJECT_NAME}
 						${OPENGL_LIB}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
-						${SDL2_TTF_LIB})
+						${SDL2_TTF_LIB}
+                        ArtemisCpp
+                        json_spirit)
 
