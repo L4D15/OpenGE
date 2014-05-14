@@ -1,9 +1,9 @@
 language: cpp
 compiler:
-	- gcc
-	- clang
+ - gcc
+ - clang
 
 script: cmake . && make
 before_install:
-	- brew update
-	- brew install boost --with-python SDL2 SDL2_image SDL2_ttf
+ - brew update
+ - brew install boost --with-python SDL2 SDL2_image SDL2_ttf
