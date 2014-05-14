@@ -1,6 +1,8 @@
 OpenGE
 ===============
 
+[![Build Status](https://travis-ci.org/L4D15/OpenGE.svg?branch=master)](https://travis-ci.org/L4D15/OpenGE)
+
 OpenGE stands for Open Game Engine, a free and open source game engine with educational purposes in mind.
 
 ## Compiling
