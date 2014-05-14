@@ -73,7 +73,7 @@ void Game::InitializeWindow()
 {
 	window = new Window();
 	window->title = "Default Game Window";
-	window->Show();
+	window->Show(1366, 720, false);
 }
 
 void Game::InitializeTime()
