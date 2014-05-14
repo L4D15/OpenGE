@@ -1,8 +1,10 @@
-#include <iostream>
+#include "Engine/Core/Game.hpp"
 
 int main(int argc, char** argv)
 {
-	std::cout << "Hello world!" << std::endl;
+	Game game;
+
+	game.Start();
 
 	return 0;
 }

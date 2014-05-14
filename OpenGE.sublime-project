@@ -20,7 +20,8 @@
 	{
 		"sublimeclang_options" :
         [
-            "-Wno-reorder"
+            "-Wno-reorder",
+            "-IEngine/Libraries -IEngine/Core -IEngine/CoreMath -IGame"
         ],
 		"sublimeclang_options_script": "${project_path:compileflags.rb} ${project_path:Build}"	
 	}
