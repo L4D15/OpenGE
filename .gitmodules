@@ -1,0 +1,6 @@
+[submodule "Engine/Libraries/Artemis-Cpp"]
+	path = Engine/Libraries/Artemis-Cpp
+	url = https://github.com/vinova/Artemis-Cpp.git
+[submodule "Engine/Libraries/json-spirit"]
+	path = Engine/Libraries/json-spirit
+	url = https://github.com/sirikata/json-spirit.git
