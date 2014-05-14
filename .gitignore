@@ -20,3 +20,6 @@ install_manifest.txt
 
 # Build
 Build/
+
+# Sublime Text
+*.sublime-workspace
