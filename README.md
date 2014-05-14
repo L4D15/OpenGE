@@ -13,3 +13,7 @@ Libraries:
 * SDL_Image.
 * SDL_TTF.
 * Boost.
+
+### OS X
+
+Install [Brew](http://brew.sh/) (I can't find a reason you don't already have it). You can install all the libraries from brew, but in the case of boost install with the `--with-python` argument so the Boost.Python library is also installed.
