@@ -12,6 +12,8 @@ public:
 
 	bool Execute(std::string script);
 
+	void CreateEnvironment();
+
 private:
 	lua_State* state;
 };

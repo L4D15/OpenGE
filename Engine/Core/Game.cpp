@@ -11,6 +11,7 @@ Time* 			Game::time 			= NULL;
 Settings* 		Game::settings 		= NULL;
 EventManager* 	Game::eventManager 	= NULL;
 Input*			Game::input 		= NULL;
+Scripting*		Game::scripting 	= NULL;
 // ---
 
 Game::Game()
@@ -93,12 +94,19 @@ void Game::InitializeEventManagement()
 	input = new Input();
 }
 
+void Game::InitializeScripting()
+{
+	scripting = new Scripting();
+	scripting->CreateEnvironment();
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
 	InitializeSettings();
 	InitializeWindow();
 	InitializeTime();
+	InitializeScripting();
 
 	run = true;
 	MainLoop();

@@ -1,5 +1,7 @@
 #include "Engine/Core/Scripting.hpp"
 #include "Engine/Core/Game.hpp"
+#include "Engine/Core/Color.hpp"
+
 
 Scripting::Scripting()
 {
@@ -14,6 +16,8 @@ Scripting::Scripting()
 	{
 		Game::Log("Failed");
 	}
+
+	luabind::open(state);
 }
 
 Scripting::~Scripting()
@@ -37,4 +41,16 @@ bool Scripting::Execute(std::string script)
 		return false;
 	}
 	return true;
+}
+
+void Scripting::CreateEnvironment()
+{
+	using namespace luabind;
+
+	module(state)
+	[
+		class_<Color>("Color")
+			.def(constructor<int, int, int, int>())
+			.def("ToString", &Color::ToString)
+	];
 }

@@ -7,6 +7,7 @@
 #include "Engine/Core/Settings.hpp"
 #include "Engine/Core/EventManager.hpp"
 #include "Engine/Core/Input.hpp"
+#include "Engine/Core/Scripting.hpp"
 #include <string>
 
 using namespace std;
@@ -32,6 +33,7 @@ private:
 	void					InitializeTime();
 	void					InitializeSettings();
 	void					InitializeEventManagement();
+	void					InitializeScripting();
 
 protected:
 	string					name;
@@ -48,6 +50,7 @@ public:
 	static Settings*		settings;
 	static EventManager* 	eventManager;
 	static Input*			input;
+	static Scripting*		scripting;
 	
 };
 
