@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 2.6)
 # ============================================================================= #
 
 
-
-
 # ============================================================================= #
 # Project Properties
 # ============================================================================= #
@@ -21,6 +19,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # GLOB Don't follow symlink
 cmake_policy(SET CMP0009 NEW)
+
+# Add cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Tools/cmake-modules")
 
 # ============================================================================= #
 # Source Files
@@ -68,7 +69,7 @@ set(Boots_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
-find_package(Boost REQUIRED system filesystem python)
+find_package(Boost REQUIRED system filesystem)
 
 # Artemis-Cpp
 set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp/include")
@@ -80,6 +81,11 @@ set(JSON_SPIRIT_LIBRARY_TYPE STATIC)
 set(JSON_SPIRIT_BUILD_DEMOS FALSE)
 set(JSON_SPIRIT_BUILD_TESTS FALSE)
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/build")
+
+# lua
+find_package(Lua51 REQUIRED)
+find_package(Luabind REQUIRED)
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INCLUDE_DIRS})
 
 # ============================================================================= #
 # Resources
@@ -123,5 +129,7 @@ target_link_libraries(${PROJECT_NAME}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
-                        ArtemisCpp
-                        json_spirit)
+            ArtemisCpp
+            json_spirit
+            ${LUA_LIBRARIES}
+            ${LUABIND_LIBRARIES})
