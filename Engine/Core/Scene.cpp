@@ -1,6 +1,7 @@
 #include "Engine/Core/Scene.hpp"
 
-Scene::Scene()
+Scene::Scene(std::string name)
+: name(name)
 {
 	
 }
