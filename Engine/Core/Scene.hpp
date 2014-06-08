@@ -2,12 +2,13 @@
 #define OPENGE_SCENE_H
 
 #include "Engine/Libraries/Libraries.hpp"
+#include <string>
 #include <list>
 
 class Scene
 {
 public:
-	Scene();
+	Scene(std::string name);
 	~Scene();
 
 	virtual void				OnActivation();
@@ -16,8 +17,8 @@ public:
 	void						Update();
 	void						Render();
 
-protected:
-
+public:
+	std::string					name;
 	
 };
 

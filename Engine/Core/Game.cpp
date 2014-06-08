@@ -10,6 +10,7 @@ Window* 		Game::window 		= NULL;
 Time* 			Game::time 			= NULL;
 Settings* 		Game::settings 		= NULL;
 EventManager* 	Game::eventManager 	= NULL;
+SceneManager*	Game::sceneManager 	= NULL;
 Input*			Game::input 		= NULL;
 // ---
 
@@ -93,12 +94,21 @@ void Game::InitializeEventManagement()
 	input = new Input();
 }
 
+void Game::InitializeSceneManager()
+{
+	sceneManager = new SceneManager();
+	sceneManager->CreateScene("DefaultScene");
+	sceneManager->ChangeScene("DefaultScene");
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
 	InitializeSettings();
 	InitializeWindow();
 	InitializeTime();
+	InitializeSceneManager();
+	InitializeEventManagement();
 
 	run = true;
 	MainLoop();
