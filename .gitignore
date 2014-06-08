@@ -1,4 +1,4 @@
-# Mac OS X
+Mac OS X
 .DS_Store
 .AppleDouble
 .LSOverride
@@ -23,3 +23,7 @@ Build/
 
 # Sublime Text
 *.sublime-workspace
+
+# Qt Creator
+CMakeLists.txt.user
+

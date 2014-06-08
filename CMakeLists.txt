@@ -97,7 +97,7 @@ if(APPLE)
         MACOSX_PACKAGE_LOCATION "Resources/Assets/Images")
 else(APPLE)
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Content" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Content")
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Content" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/Game/Content")
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Content" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Content")
 endif(APPLE)
 
 # ============================================================================= #
@@ -125,4 +125,3 @@ target_link_libraries(${PROJECT_NAME}
 						${SDL2_TTF_LIB}
                         ArtemisCpp
                         json_spirit)
-
