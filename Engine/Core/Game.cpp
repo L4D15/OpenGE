@@ -12,6 +12,7 @@ Settings* 		Game::settings 		= NULL;
 EventManager* 	Game::eventManager 	= NULL;
 SceneManager*	Game::sceneManager 	= NULL;
 Input*			Game::input 		= NULL;
+Scripting*		Game::scripting 	= NULL;
 // ---
 
 Game::Game()
@@ -101,6 +102,12 @@ void Game::InitializeSceneManager()
 	sceneManager->ChangeScene("DefaultScene");
 }
 
+void Game::InitializeScripting()
+{
+	scripting = new Scripting();
+	scripting->CreateEnvironment();
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
@@ -109,6 +116,7 @@ void Game::Start()
 	InitializeTime();
 	InitializeSceneManager();
 	InitializeEventManagement();
+	InitializeScripting();
 
 	run = true;
 	MainLoop();

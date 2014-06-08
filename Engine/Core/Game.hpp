@@ -8,6 +8,7 @@
 #include "Engine/Core/EventManager.hpp"
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/Input.hpp"
+#include "Engine/Core/Scripting.hpp"
 #include <string>
 
 using namespace std;
@@ -34,6 +35,7 @@ private:
 	void					InitializeSettings();
 	void					InitializeEventManagement();
 	void					InitializeSceneManager();
+	void					InitializeScripting();
 
 protected:
 	string					name;
@@ -51,6 +53,7 @@ public:
 	static EventManager* 	eventManager;
 	static SceneManager*	sceneManager;
 	static Input*			input;
+	static Scripting*		scripting;
 	
 };
 

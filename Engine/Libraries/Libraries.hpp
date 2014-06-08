@@ -8,6 +8,15 @@
 	#include <SDL2/SDL.h>
 	#include <SDL2/SDL_image.h>
 	#include <SDL2/SDL_ttf.h>
+
+	extern "C"
+	{
+		#include <lua.h>
+		#include <lauxlib.h>
+		#include <lualib.h>
+	}
+	#include <luabind/luabind.hpp>
+
 #elif _Win32
 	#include <GL/gl.h>
 #elif _Win64

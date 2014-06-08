@@ -5,8 +5,6 @@ cmake_minimum_required(VERSION 2.6)
 # ============================================================================= #
 
 
-
-
 # ============================================================================= #
 # Project Properties
 # ============================================================================= #
@@ -21,6 +19,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin")
 
 # GLOB Don't follow symlink
 cmake_policy(SET CMP0009 NEW)
+
+# Add cmake modules
+list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Tools/cmake-modules")
 
 # ============================================================================= #
 # Source Files
@@ -68,7 +69,7 @@ set(Boots_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
-find_package(Boost REQUIRED system filesystem python)
+find_package(Boost REQUIRED system filesystem)
 
 # Artemis-Cpp
 set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp/include")
@@ -81,23 +82,36 @@ set(JSON_SPIRIT_BUILD_DEMOS FALSE)
 set(JSON_SPIRIT_BUILD_TESTS FALSE)
 add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/build")
 
+# lua
+find_package(Lua51 REQUIRED)
+find_package(Luabind REQUIRED)
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INCLUDE_DIRS})
+
 # ============================================================================= #
 # Resources
 # ============================================================================= #
 
 # Images
-file(GLOB_RECURSE RESOURCE_FILES "${CMAKE_SOURCE_DIR}/Engine/Content/Images/*")
-file(GLOB_RECURSE RESOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/Content/Images/*")
+file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Images/*")
+file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Images/*")
+
+# Scripts
+file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Scripts/*")
+file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*")
 
 # Mac OS X Bundle
 if(APPLE)
     set_source_files_properties(
-        ${RESOURCE_FILES}
+        ${RESOURCE_IMAGES}
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Assets/Images")
+    set_source_files_properties(
+        ${RESOURCE_SCRIPTS}
+        PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources/Assets/Scripts")
 else(APPLE)
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Content" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Content")
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Content" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Content")
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Assets")
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Assets")
 endif(APPLE)
 
 # ============================================================================= #
@@ -113,15 +127,20 @@ if(APPLE)
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/Game/Content/Icons/Icon.icns")
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE ${ENGINE_SOURCE_FILES} ${GAME_SOURCE_FILES} ${RESOURCE_FILES_IMAGES})
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_SOURCE_FILES}
+                                                    ${GAME_SOURCE_FILES}
+                                                    ${RESOURCE_IMAGES}
+                                                    ${RESOURCE_SCRIPTS})
 else(APPLE)
 	add_executable(${PROJECT_NAME} ${ENGINE_SOURCE_FILES} ${GAME_SOURCE_FILES})
 endif(APPLE)
 
-target_link_libraries(${PROJECT_NAME}
+target_link_libraries(  ${PROJECT_NAME}
 						${OPENGL_LIB}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
                         ArtemisCpp
-                        json_spirit)
+                        json_spirit
+                        ${LUA_LIBRARIES}
+                        ${LUABIND_LIBRARIES})
