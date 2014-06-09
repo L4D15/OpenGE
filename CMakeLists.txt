@@ -29,7 +29,8 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
 # ============================================================================= #
 # Source Files
 # ============================================================================= #
-file(GLOB_RECURSE ENGINE_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
+file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
+file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.cpp")
 file(GLOB_RECURSE GAME_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/*.cpp")
 
 # ============================================================================= #
@@ -137,13 +138,16 @@ if(APPLE)
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/Game/Content/Icons/Icon.icns")
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_SOURCE_FILES}
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_CORE_SOURCE_FILES}
+                                                    ${ENGINE_COMPONENTS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
                                                     ${RESOURCE_IMAGES}
                                                     ${RESOURCE_SCRIPTS}
                                                     ${RESOURCE_SCENES})
 else(APPLE)
-	add_executable(${PROJECT_NAME} ${ENGINE_SOURCE_FILES} ${GAME_SOURCE_FILES})
+	add_executable(${PROJECT_NAME}  ${ENGINE_CORE_SOURCE_FILES}
+                                    ${ENGINE_COMPONENTS_SOURCE_FILES}
+                                    ${GAME_SOURCE_FILES})
 endif(APPLE)
 
 target_link_libraries(  ${PROJECT_NAME}
