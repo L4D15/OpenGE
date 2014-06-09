@@ -25,6 +25,8 @@ public:
 	void					Update();
 	void					Render();
 
+	virtual void			Initialize();
+
 	static void				Terminate();
 	static void				Log(string text, bool endLine = true);
 

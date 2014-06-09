@@ -1,8 +1,8 @@
-#include "Engine/Core/Game.hpp"
+#include "Game/TestGame.hpp"
 
 int main(int argc, char** argv)
 {
-	Game game;
+	TestGame game;
 
 	game.Start();
 

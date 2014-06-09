@@ -23,6 +23,9 @@ cmake_policy(SET CMP0009 NEW)
 # Add cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Tools/cmake-modules")
 
+# Set C++11
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
+
 # ============================================================================= #
 # Source Files
 # ============================================================================= #
@@ -71,9 +74,9 @@ set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
 find_package(Boost REQUIRED system filesystem)
 
-# Artemis-Cpp
-set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp/include")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp")
+# anax
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/anax/include")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/anax")
 
 # json-spirit
 set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/include")
@@ -140,7 +143,7 @@ target_link_libraries(  ${PROJECT_NAME}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
-                        ArtemisCpp
+                        anax
                         json_spirit
                         ${LUA_LIBRARIES}
                         ${LUABIND_LIBRARIES})

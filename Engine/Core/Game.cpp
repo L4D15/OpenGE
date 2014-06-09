@@ -108,6 +108,11 @@ void Game::InitializeScripting()
 	scripting->CreateEnvironment();
 }
 
+void Game::Initialize()
+{
+
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
@@ -117,6 +122,8 @@ void Game::Start()
 	InitializeSceneManager();
 	InitializeEventManagement();
 	InitializeScripting();
+
+	Initialize();
 
 	run = true;
 	MainLoop();
@@ -142,6 +149,7 @@ void Game::HandleEvents()
 void Game::Update()
 {
 	time->Update();
+	sceneManager->OnLoop();
 }
 
 void Game::Render()
@@ -149,6 +157,7 @@ void Game::Render()
 	window->Clear();
 
 	// Draw stuff
+	sceneManager->OnRender();
 
 	window->Draw();
 }
