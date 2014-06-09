@@ -11,6 +11,7 @@ class Scene
 {
 public:
 	Scene(std::string name);
+	Scene(std::string name, std::string filePath);
 	~Scene();
 
 	virtual void				OnActivation();
@@ -23,6 +24,8 @@ public:
 	void						RenameEntity(std::string name, std::string newName);
 	void						DeleteEntity(std::string name);
 	Entity&						GetEntity(std::string name);
+
+	std::string					ToString();
 
 public:
 	std::string					name;

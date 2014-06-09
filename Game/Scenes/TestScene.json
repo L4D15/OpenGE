@@ -1,0 +1,22 @@
+{
+	"name": "TestScene",
+	"entities": 
+	[
+		{
+			"name": "object1",
+			"components": 
+			[
+				{
+					"name": "Position",
+					"x": 0,
+					"y": 0	
+				},
+				{
+					"name": "Velocity",
+					"x": 1,
+					"y": 0
+				}
+			]
+		}
+	]
+}

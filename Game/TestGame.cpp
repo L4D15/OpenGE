@@ -13,6 +13,9 @@ TestGame::~TestGame()
 
 void TestGame::Initialize()
 {
-	Scene& scene = sceneManager->GetCurrentScene();
+	Scene& scene = sceneManager->CreateScene("TestScene", "Content/Resources/Scenes/TestScene.json");
+	sceneManager->ChangeScene("TestScene");
+	
 	Game::Log(scene.name);
+	Game::Log(scene.ToString());
 }
