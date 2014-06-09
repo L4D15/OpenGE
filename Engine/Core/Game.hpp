@@ -7,6 +7,7 @@
 #include "Engine/Core/Settings.hpp"
 #include "Engine/Core/EventManager.hpp"
 #include "Engine/Core/SceneManager.hpp"
+#include "Engine/Core/ResourceManager.hpp"
 #include "Engine/Core/Input.hpp"
 #include "Engine/Core/Scripting.hpp"
 #include <string>
@@ -36,6 +37,7 @@ private:
 	void					InitializeTime();
 	void					InitializeSettings();
 	void					InitializeEventManagement();
+	void					InitializeResourceManager();
 	void					InitializeSceneManager();
 	void					InitializeScripting();
 
@@ -54,6 +56,7 @@ public:
 	static Settings*		settings;
 	static EventManager* 	eventManager;
 	static SceneManager*	sceneManager;
+	static ResourceManager*	resourceManager;
 	static Input*			input;
 	static Scripting*		scripting;
 	

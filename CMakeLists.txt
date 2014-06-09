@@ -102,6 +102,9 @@ file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Image
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Scripts/*")
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*")
 
+# Scenes
+file(GLOB_RECURSE RESOURCE_SCENES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes/*")
+
 # Mac OS X Bundle
 if(APPLE)
     set_source_files_properties(
@@ -112,6 +115,10 @@ if(APPLE)
         ${RESOURCE_SCRIPTS}
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Assets/Scripts")
+    set_source_files_properties(
+        ${RESOURCE_SCENES}
+        PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources/Scenes")
 else(APPLE)
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Assets")
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Assets")
@@ -133,7 +140,8 @@ if(APPLE)
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
                                                     ${RESOURCE_IMAGES}
-                                                    ${RESOURCE_SCRIPTS})
+                                                    ${RESOURCE_SCRIPTS}
+                                                    ${RESOURCE_SCENES})
 else(APPLE)
 	add_executable(${PROJECT_NAME} ${ENGINE_SOURCE_FILES} ${GAME_SOURCE_FILES})
 endif(APPLE)
@@ -143,6 +151,7 @@ target_link_libraries(  ${PROJECT_NAME}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
+                        ${Boost_LIBRARIES}
                         anax
                         json_spirit
                         ${LUA_LIBRARIES}

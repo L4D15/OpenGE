@@ -4,15 +4,16 @@
 using namespace std;
 
 // Static initialization
-bool 			Game::instantiated 	= false;
-bool 			Game::run 			= false;
-Window* 		Game::window 		= NULL;
-Time* 			Game::time 			= NULL;
-Settings* 		Game::settings 		= NULL;
-EventManager* 	Game::eventManager 	= NULL;
-SceneManager*	Game::sceneManager 	= NULL;
-Input*			Game::input 		= NULL;
-Scripting*		Game::scripting 	= NULL;
+bool 				Game::instantiated 		= false;
+bool 				Game::run 				= false;
+Window* 			Game::window 			= NULL;
+Time* 				Game::time 				= NULL;
+Settings* 			Game::settings 			= NULL;
+EventManager* 		Game::eventManager 		= NULL;
+SceneManager*		Game::sceneManager 		= NULL;
+ResourceManager* 	Game::resourceManager 	= NULL;
+Input*				Game::input 			= NULL;
+Scripting*			Game::scripting 		= NULL;
 // ---
 
 Game::Game()
@@ -102,6 +103,11 @@ void Game::InitializeSceneManager()
 	sceneManager->ChangeScene("DefaultScene");
 }
 
+void Game::InitializeResourceManager()
+{
+	resourceManager = new ResourceManager();
+}
+
 void Game::InitializeScripting()
 {
 	scripting = new Scripting();
@@ -121,6 +127,7 @@ void Game::Start()
 	InitializeTime();
 	InitializeSceneManager();
 	InitializeEventManagement();
+	InitializeResourceManager();
 	InitializeScripting();
 
 	Initialize();

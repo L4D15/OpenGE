@@ -13,7 +13,7 @@ TestGame::~TestGame()
 
 void TestGame::Initialize()
 {
-	Scene& scene = sceneManager->CreateScene("TestScene", "Content/Resources/Scenes/TestScene.json");
+	Scene& scene = sceneManager->CreateScene("TestScene", Game::resourceManager->GetPath("Scenes/TestScene.json"));
 	sceneManager->ChangeScene("TestScene");
 	
 	Game::Log(scene.name);
