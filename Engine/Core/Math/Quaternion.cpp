@@ -1,5 +1,6 @@
 #include "Engine/Core/Math/Quaternion.hpp"
 #include "Engine/Core/Math/Math.hpp"
+#include <sstream>
 
 Quaternion::Quaternion()
 : w(0.0), x(0.0), y(0.0), z(0.0)
@@ -97,4 +98,13 @@ Quaternion Quaternion::Normalized()
 	}
 
 	return normalized;
+}
+
+std::string Quaternion::ToString()
+{
+	std::stringstream ss;
+
+	ss << w << " * " << "(" << x << "," << y << "," << z << ")";
+
+	return ss.str();
 }

@@ -1,4 +1,5 @@
 #include "Engine/Components/Transform.hpp"
+#include <sstream>
 
 Transform::Transform()
 : position(), rotation(), scale(1.0f, 1.0f, 1.0f)
@@ -21,11 +22,6 @@ Transform::Transform(float posX, float posY, float posZ, float rotX, float rotY,
 
 Transform::Transform(float posX, float posY, float posZ, float rotX, float rotY, float rotZ, float sclX, float sclY, float sclZ)
 : position(posX, posY, posZ), /* HERE */ scale(sclX, sclY, sclZ)
-{
-
-}
-
-Transform::~Transform()
 {
 
 }
@@ -112,3 +108,18 @@ Transform::Transform(json_spirit::Value jsonString)
 	scale.y = sclY;
 	scale.z = sclZ;
 }
+
+Transform::~Transform()
+{
+
+}
+
+std::string Transform::ToString()
+{
+	std::stringstream ss;
+
+	ss << "Transform::[" << position.ToString() << "; " << rotation.ToString() << "; " << scale.ToString() << "]";
+
+	return ss.str();
+}
+

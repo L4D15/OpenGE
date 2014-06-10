@@ -1,6 +1,7 @@
 #include "Engine/Core/Scene.hpp"
 #include "Engine/Core/Game.hpp"
 #include "Engine/Libraries/Libraries.hpp"
+#include "Engine/Components/Transform.hpp"
 #include <fstream>
 
 using namespace anax;
@@ -41,10 +42,23 @@ Scene::Scene(std::string name, std::string filePath)
 
 		Entity entity;
 		std::string entityName;
+		json_spirit::Array components;
 		for (unsigned int index = 0; index < numberOfEntities; ++index)
 		{
 			entityName = entities[index].getObject().at("name").getString();
-			CreateEntity(entityName);
+			entity = CreateEntity(entityName);
+			components = entities[index].getObject().at("components").getArray();
+
+			for (unsigned int compIndex = 0; compIndex < components.size(); ++compIndex)
+			{
+				std::string componentName;
+				componentName = components[compIndex].getObject().at("name").getString();
+
+				if (componentName == "Transform")
+				{
+					entity.addComponent<Transform>(components[compIndex].getObject());
+				}
+			}
 		}
 	}
 	else

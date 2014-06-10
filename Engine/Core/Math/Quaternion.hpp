@@ -18,13 +18,12 @@ public:
 	Quaternion 				operator*(const float f);
 	Quaternion 				operator/(const float f);
 
-	float							DotProduct(const Quaternion& other);
-
-	float							Length();
-	float							LengthQuadratic();
+	float					DotProduct(const Quaternion& other);
+	float					Length();
+	float					LengthQuadratic();
 	Quaternion 				Normalized();
 
-
+	std::string				ToString();
 public:
 	float w;
 	float x;

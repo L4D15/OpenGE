@@ -19,6 +19,8 @@ public:
 
 	virtual ~Transform();
 
+	std::string ToString();
+
 public:
 	Vector3				position;
 	Quaternion 			rotation;
