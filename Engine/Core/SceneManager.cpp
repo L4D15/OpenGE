@@ -46,6 +46,14 @@ Scene& SceneManager::CreateScene(std::string name, std::string filePath)
 	return *scene;
 }
 
+Scene& SceneManager::AddScene(std::string sceneName, Scene& scene)
+{
+	std::pair<std::string, Scene* > mappedScene(sceneName, &scene);
+	sceneMapper.insert(mappedScene);
+
+	return scene;
+}
+
 /**
 @brief	Changed the current scene.
 
