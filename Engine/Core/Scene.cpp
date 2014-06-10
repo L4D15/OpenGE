@@ -57,6 +57,7 @@ Scene::Scene(std::string name, std::string filePath)
 				if (componentName == "Transform")
 				{
 					entity.addComponent<Transform>(components[compIndex].getObject());
+					Game::Log(entity.getComponent<Transform>().ToString());
 				}
 			}
 		}

@@ -28,9 +28,14 @@ Game::Game()
 
 Game::~Game()
 {
-	delete window;
 	delete time;
 	delete settings;
+	delete eventManager;
+	delete sceneManager;
+	delete resourceManager;
+	delete input;
+	delete scripting;
+	delete window;
 	SDL_Quit();
 	TTF_Quit();
 }

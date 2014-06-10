@@ -73,7 +73,7 @@ set(Boots_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
-find_package(Boost REQUIRED system filesystem)
+find_package(Boost REQUIRED system filesystem thread)
 
 # anax
 set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/anax/include")
