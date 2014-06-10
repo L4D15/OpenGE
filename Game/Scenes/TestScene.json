@@ -1,0 +1,21 @@
+{
+	"name": "TestScene",
+	"entities": 
+	[
+		{
+			"name": "object1",
+			"components": 
+			[
+				{
+					"name": "Transform",
+					"position":
+					{
+						"x": 1.0,
+						"y": 2.5,
+						"z": 3.0
+					}
+				}
+			]
+		}
+	]
+}

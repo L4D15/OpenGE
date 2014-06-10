@@ -15,6 +15,7 @@ public:
 
 	Scene&				ChangeScene(std::string sceneName);
 	Scene&				CreateScene(std::string sceneName);
+	Scene&				CreateScene(std::string sceneName, std::string filePath);
 	void				DeleteScene(std::string name);
 	void				DeleteScene(Scene& scene);
 	Scene&				GetScene(std::string name);

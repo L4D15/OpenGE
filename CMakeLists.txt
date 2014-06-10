@@ -23,10 +23,14 @@ cmake_policy(SET CMP0009 NEW)
 # Add cmake modules
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Tools/cmake-modules")
 
+# Set C++11
+set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
+
 # ============================================================================= #
 # Source Files
 # ============================================================================= #
-file(GLOB_RECURSE ENGINE_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
+file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
+file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.cpp")
 file(GLOB_RECURSE GAME_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/*.cpp")
 
 # ============================================================================= #
@@ -69,11 +73,11 @@ set(Boots_USE_STATIC_LIBS ON)
 set(Boost_USE_MULTITHREADED ON)
 set(Boost_STATIC_RUNTIME OFF)
 set(Boost_DEBUG ON)
-find_package(Boost REQUIRED system filesystem)
+find_package(Boost REQUIRED system filesystem thread)
 
-# Artemis-Cpp
-set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp/include")
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/Artemis-Cpp")
+# anax
+set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/anax/include")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/anax")
 
 # json-spirit
 set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Libraries/json-spirit/include")
@@ -99,6 +103,9 @@ file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Image
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Scripts/*")
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*")
 
+# Scenes
+file(GLOB_RECURSE RESOURCE_SCENES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes/*")
+
 # Mac OS X Bundle
 if(APPLE)
     set_source_files_properties(
@@ -109,6 +116,10 @@ if(APPLE)
         ${RESOURCE_SCRIPTS}
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Assets/Scripts")
+    set_source_files_properties(
+        ${RESOURCE_SCENES}
+        PROPERTIES
+        MACOSX_PACKAGE_LOCATION "Resources/Scenes")
 else(APPLE)
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Assets")
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Assets")
@@ -127,12 +138,16 @@ if(APPLE)
     set(MACOSX_BUNDLE_SHORT_VERSION_STRING "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_BUNDLE_VERSION "${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/Game/Content/Icons/Icon.icns")
-    add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_SOURCE_FILES}
+    add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_CORE_SOURCE_FILES}
+                                                    ${ENGINE_COMPONENTS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
                                                     ${RESOURCE_IMAGES}
-                                                    ${RESOURCE_SCRIPTS})
+                                                    ${RESOURCE_SCRIPTS}
+                                                    ${RESOURCE_SCENES})
 else(APPLE)
-	add_executable(${PROJECT_NAME} ${ENGINE_SOURCE_FILES} ${GAME_SOURCE_FILES})
+	add_executable(${PROJECT_NAME}  ${ENGINE_CORE_SOURCE_FILES}
+                                    ${ENGINE_COMPONENTS_SOURCE_FILES}
+                                    ${GAME_SOURCE_FILES})
 endif(APPLE)
 
 target_link_libraries(  ${PROJECT_NAME}
@@ -140,7 +155,8 @@ target_link_libraries(  ${PROJECT_NAME}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
-                        ArtemisCpp
+                        ${Boost_LIBRARIES}
+                        anax
                         json_spirit
                         ${LUA_LIBRARIES}
                         ${LUABIND_LIBRARIES})
