@@ -38,13 +38,18 @@ If they are present in your distro repositories install from there or if you fee
 
 Boost:
 
-1. Download source core from [here](http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download)
+1. Download source code from [here](http://sourceforge.net/projects/boost/files/boost/1.55.0/boost_1_55_0.tar.gz/download)
 2. Unzip and navigate to the folder.
 3. Install required libraries and tools `sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev`
 4. Prepare Boost to be compiled with `./bootstrap.sh --prefix=/usr/local`
 5. Start compilation with `sudo ./b2 --with=all install`. This will take a while (15~30 minutes).
 
-lua:
+lua and LuaBind:
 
 1. `sudo apt-get install lua5.1 lua5.1-policy-dev`
-2. Done.
+2. `sudo apt-get install libluabind-dev`
+
+OpenGL:
+
+1. `sudo apt-get install mesa-common-dev`
+2. `sudo apt-get install libgl1-mesa-dev`

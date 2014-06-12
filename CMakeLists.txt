@@ -48,6 +48,8 @@ if(APPLE)
     if(NOT OPENGL_LIB)
         message (FATAL_ERROR "Failed to find OpenGL in your Frameworks directory")
     endif(NOT OPENGL_LIB)
+else()
+    find_package(OpenGL REQUIRED)
 endif(APPLE)
 
 # SDL2
