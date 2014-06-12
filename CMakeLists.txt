@@ -42,12 +42,19 @@ set(INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}")
 # Libraries
 # ============================================================================= #
 
+message("Searching libraries for ${CMAKE_SYSTEM_NAME}")
+
 # OpenGL
 if(APPLE)
     find_library(OPENGL_LIB OpenGL)
     if(NOT OPENGL_LIB)
         message (FATAL_ERROR "Failed to find OpenGL in your Frameworks directory")
     endif(NOT OPENGL_LIB)
+else()
+    find_package(OpenGL REQUIRED)
+    if(NOT OPENGL_FOUND)
+        message("Failed to load OpenGL")
+    endif()
 endif(APPLE)
 
 # SDL2
@@ -66,6 +73,22 @@ if(APPLE)
     if(NOT SDL2_TTF_LIB)
         message(FATAL_ERROR "Failed to find SDL2_ttf in your Frameworks directory.")
     endif(NOT SDL2_TTF_LIB)
+else()
+    if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        find_library(SDL2_LIB NAMES SDL2 HINTS "/usr/local/lib")
+        find_library(SDL2_IMAGE_LIB NAMES SDL2_image HINTS "/usr/local/lib")
+        find_library(SDL2_TTF_LIB NAMES SDL2_ttf HINTS "/usr/local/lib")
+
+        if (NOT SDL2_LIB)
+            message("-- [!] Failed to load SDL2 library from /usr/local/lib")
+        endif()
+        if (NOT SDL2_IMAGE_LIB)
+            message("-- [!] Failed to load SDL2_image library from /usr/local/lib")
+        endif()
+        if (NOT SDL2_TTF_LIB)
+            message("-- [!] Failed to load SDL2_ttf library from /usr/local/lib")
+        endif()
+    endif()
 endif(APPLE)
 
 # Boost
@@ -96,11 +119,9 @@ set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INC
 # ============================================================================= #
 
 # Images
-file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Images/*")
 file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Images/*")
 
 # Scripts
-file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets/Scripts/*")
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*")
 
 # Scenes
@@ -121,7 +142,6 @@ if(APPLE)
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Scenes")
 else(APPLE)
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Engine/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Engine/Assets")
 	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Assets")
 endif(APPLE)
 
@@ -152,6 +172,7 @@ endif(APPLE)
 
 target_link_libraries(  ${PROJECT_NAME}
 						${OPENGL_LIB}
+                        ${OPENGL_LIBRARIES}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
