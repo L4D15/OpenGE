@@ -53,3 +53,37 @@ OpenGL:
 
 1. `sudo apt-get install mesa-common-dev`
 2. `sudo apt-get install libgl1-mesa-dev`
+
+SDL2:
+
+1. Download the source code from [here](http://www.libsdl.org/download-2.0.php).
+2. Unzip and navigate to the folder.
+3. `./configure`
+4. `make`
+5. `sudo make install`
+
+SDL2_Image:
+
+1. Download the source code from [here](https://www.libsdl.org/projects/SDL_image/)
+2. To enable support of image formats other than BMP: `sudo apt-get install libpng12-dev libjpeg-dev libtiff4-dev libwebp-dev`
+3. `./configure`
+4. `sudo make install`
+
+SDL2_TTF:
+
+1. Download the source code from [here](https://www.libsdl.org/projects/SDL_ttf/)
+2. Install the FreeType library `sudo apt-get install libfreetype6-dev`
+3. `./configure`
+4. `make`
+5. `sudo make install`
+
+OpenGE also uses C++11 features, so you need a compiler compatible with it.
+
+C++11:
+
+1. `sudo add-apt-repository ppa:ubuntu-toolchain-r/test`
+2. `sudo apt-get update`
+3. `sudo apt-get install gcc-4.8 g++-4.8`
+4. `sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6`
+5. `sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8`
+6. `sudo update-alternatives --config gcc` and select the 4.8 option.

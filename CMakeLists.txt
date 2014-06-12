@@ -42,6 +42,8 @@ set(INCLUDE_DIRECTORIES "${CMAKE_SOURCE_DIR}")
 # Libraries
 # ============================================================================= #
 
+message("Searching libraries for ${CMAKE_SYSTEM_NAME}")
+
 # OpenGL
 if(APPLE)
     find_library(OPENGL_LIB OpenGL)
@@ -68,6 +70,22 @@ if(APPLE)
     if(NOT SDL2_TTF_LIB)
         message(FATAL_ERROR "Failed to find SDL2_ttf in your Frameworks directory.")
     endif(NOT SDL2_TTF_LIB)
+else()
+    if(${CMAKE_SYSTEM_NAME} MATCHES "Linux")
+        find_library(SDL2_LIB NAMES SDL2 HINTS "/usr/local/lib")
+        find_library(SDL2_IMAGE_LIB NAMES SDL2_image HINTS "/usr/local/lib")
+        find_library(SDL2_TTF_LIB NAMES SDL2_ttf HINTS "/usr/local/lib")
+
+        if (NOT SDL2_LIB)
+            message("-- [!] Failed to load SDL2 library from /usr/local/lib")
+        endif()
+        if (NOT SDL2_IMAGE_LIB)
+            message("-- [!] Failed to load SDL2_image library from /usr/local/lib")
+        endif()
+        if (NOT SDL2_TTF_LIB)
+            message("-- [!] Failed to load SDL2_ttf library from /usr/local/lib")
+        endif()
+    endif()
 endif(APPLE)
 
 # Boost
