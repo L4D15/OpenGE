@@ -43,3 +43,8 @@ Boost:
 3. Install required libraries and tools `sudo apt-get install build-essential g++ python-dev autotools-dev libicu-dev libbz2-dev`
 4. Prepare Boost to be compiled with `./bootstrap.sh --prefix=/usr/local`
 5. Start compilation with `sudo ./b2 --with=all install`. This will take a while (15~30 minutes).
+
+lua:
+
+1. `sudo apt-get install lua5.1 lua5.1-policy-dev`
+2. Done.
