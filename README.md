@@ -87,3 +87,33 @@ C++11:
 4. `sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 60 --slave /usr/bin/g++ g++ /usr/bin/g++-4.6`
 5. `sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.8 40 --slave /usr/bin/g++ g++ /usr/bin/g++-4.8`
 6. `sudo update-alternatives --config gcc` and select the 4.8 option.
+
+At the time of the creation of this guide GCC have a bug where the use of `#elif` differs from `#else #if` so the project fails to compile luabind. Until thise parsing error is fixed in a newer version of GCC some tweaking in LuaBind files is necessary to make it work. The following list details the files and line of code where `#elif` must be changed for an `#else` and a nested `#if`:
+
+* __/usr/include/luabind/detail/call_member.hpp__ [319]
+* __/usr/include/luabind/detail/call_function.hpp__ [326]
+* __/usr/include/luabind/wrapper_base.hpp__ [92]
+
+__¡IMPORTANT!__ Remeber to add another `#endif` at the end of the file since we added a new `#if`. To clarify, we are changin from this:
+
+```C++
+#if (...)
+
+#elif (...)
+
+#endif
+```
+
+To this:
+
+```C++
+#if (...)
+
+#else
+	#if (...)
+
+	#endif
+#endif
+```
+
+If you, like me, find this bug pretty anoying feel free to email the LuaBind guys to change those lines of code and the GCC devs to fix the parser of GCC 4.8. In the mean time this is the only workaround in Linux :-(
