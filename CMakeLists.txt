@@ -52,6 +52,9 @@ if(APPLE)
     endif(NOT OPENGL_LIB)
 else()
     find_package(OpenGL REQUIRED)
+    if(NOT OPENGL_FOUND)
+        message("Failed to load OpenGL")
+    endif()
 endif(APPLE)
 
 # SDL2
@@ -169,6 +172,7 @@ endif(APPLE)
 
 target_link_libraries(  ${PROJECT_NAME}
 						${OPENGL_LIB}
+                        ${OPENGL_LIBRARIES}
 						${SDL2_LIB}
 						${SDL2_IMAGE_LIB}
 						${SDL2_TTF_LIB}
