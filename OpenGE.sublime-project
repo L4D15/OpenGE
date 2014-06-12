@@ -4,7 +4,7 @@
 		{
 			"folder_exclude_patterns": ["Build"],
 			"file_exclude_patterns": ["*.sublime-workspace"],
-			"path": "/Users/ladis/Projects/OpenGE"
+			"path": "."
 		}
 	],
 	"build_systems":
