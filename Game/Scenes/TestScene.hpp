@@ -12,9 +12,9 @@ public:
 
 	void OnActivation()
 	{
-		Entity entity = CreateEntity("Object");
-		GameObject object("Object", entity);
-		object.AttachComponent<Transform>(1.0, 1.0, 1.0);
+		//Entity entity = CreateEntity("Object");
+		//GameObject object("Object", entity);
+		//object.AttachComponent<Transform>(1.0, 1.0, 1.0);
 	}
 
 	virtual ~TestScene() { }

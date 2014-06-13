@@ -8,7 +8,8 @@
 class GameObject
 {
 protected:
-	GameObject(std::string name, const Entity& entity) : name(name), entity(entity) { }
+	GameObject(std::string name, const anax::Entity& entity) : name(name), entity(entity) { }
+	virtual ~GameObject() {}
 
 public:
 	template <typename T, typename... Args>
@@ -23,9 +24,13 @@ public:
 	template <typename T>
 	bool				HasComponent() const { return entity.hasComponent<T>(); }
 
+	void				AddComponents(json_spirit::Array jsonArray);
+
 protected:
 	std::string 		name;
 	anax::Entity 		entity;
+
+	friend class Scene;
 };
 
 #endif // OPENGE_GAMEOBJECT_H
