@@ -2,6 +2,7 @@
 #define OPENGE_SCENE_H
 
 #include "Engine/Libraries/Libraries.hpp"
+#include "Engine/Core/GameObject.hpp"
 #include <string>
 #include <map>
 
@@ -20,10 +21,10 @@ public:
 	virtual void				Update();
 	virtual void				Render();
 
-	Entity&						CreateEntity(std::string name);
-	void						RenameEntity(std::string name, std::string newName);
-	void						DeleteEntity(std::string name);
-	Entity&						GetEntity(std::string name);
+	GameObject&					CreateGameObject(std::string name);
+	void						RenameGameObject(std::string name, std::string newName);
+	void						DeleteGameObject(std::string name);
+	GameObject&					Find(std::string name);
 
 	std::string					ToString();
 
@@ -31,7 +32,7 @@ public:
 	std::string					name;
 	std::map<
 		std::string,
-		Entity* >				entityMapper;
+		GameObject* >			objectMapper;
 
 private:
 	World						world;

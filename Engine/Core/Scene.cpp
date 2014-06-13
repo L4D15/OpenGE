@@ -3,6 +3,7 @@
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Components/Transform.hpp"
 #include <fstream>
+#include <sstream>
 
 using namespace anax;
 
@@ -32,39 +33,32 @@ Scene::Scene(std::string name, std::string filePath)
 
 	if (bParsed == true)
 	{
-		json_spirit::Array entities;
+		json_spirit::Array objectList;
 
-		entities = root.getObject().at("entities").getArray();
+		objectList = root.getObject().at("objects").getArray();
 
-		unsigned int numberOfEntities;
+		unsigned int numberOfObjects;
 
-		numberOfEntities = entities.size();
+		numberOfObjects = objectList.size();
 
-		Entity entity;
-		std::string entityName;
+		std::string objectName;
 		json_spirit::Array components;
-		for (unsigned int index = 0; index < numberOfEntities; ++index)
+
+		for (unsigned int index = 0; index < numberOfObjects; ++index)
 		{
-			entityName = entities[index].getObject().at("name").getString();
-			entity = CreateEntity(entityName);
-			components = entities[index].getObject().at("components").getArray();
+			objectName = objectList[index].getObject().at("name").getString();
+			GameObject& object = CreateGameObject(objectName);
+			components = objectList[index].getObject().at("components").getArray();
 
-			for (unsigned int compIndex = 0; compIndex < components.size(); ++compIndex)
-			{
-				std::string componentName;
-				componentName = components[compIndex].getObject().at("name").getString();
-
-				if (componentName == "Transform")
-				{
-					entity.addComponent<Transform>(components[compIndex].getObject());
-					Game::Log(entity.getComponent<Transform>().ToString());
-				}
-			}
+			object.AddComponents(components);
 		}
 	}
 	else
 	{
-		Game::Log("Scene::Scene() - Error, JSON file couldn't be parsed");
+		std::stringstream ss;
+
+		ss << "[!] -- Scene::Scene() - Error, JSON file " << jsonFilePath << " couldn't be parsed.";
+		Game::Log(ss.str());
 	}
 }
 
@@ -93,45 +87,47 @@ void Scene::Render()
 
 }
 
-Entity& Scene::CreateEntity(std::string name)
+GameObject& Scene::CreateGameObject(std::string name)
 {
-	Entity* entity;
+	GameObject* gameObject;
 
-	entity = new Entity(world.createEntity());
+	Entity entity = world.createEntity();
 
-	std::pair<std::string, Entity* > mappedEntity(name, entity);
+	gameObject = new GameObject(name, entity);
 
-	entityMapper.insert(mappedEntity);
+	std::pair<std::string, GameObject* > mappedObject(name, gameObject);
 
-	return *entity;
+	objectMapper.insert(mappedObject);
+
+	return *gameObject;
 }
 
-void Scene::RenameEntity(std::string name, std::string newName)
+void Scene::RenameGameObject(std::string name, std::string newName)
 {
-	Entity& entity = GetEntity(name);
-	DeleteEntity(name);
+	GameObject& object = Find(name);
+	DeleteGameObject(name);
 
-	std::pair<std::string, Entity* > mappedEntity(newName, &entity);
-	entityMapper.insert(mappedEntity);
+	std::pair<std::string, GameObject* > mappedObject(newName, &object);
+	objectMapper.insert(mappedObject);
 }
 
-void Scene::DeleteEntity(std::string name)
+void Scene::DeleteGameObject(std::string name)
 {
-	std::map<std::string, Entity*>::iterator mappedEntity;
+	std::map<std::string, GameObject*>::iterator mappedObject;
 
-	mappedEntity = entityMapper.find(name);
+	mappedObject = objectMapper.find(name);
 
-	if (mappedEntity != entityMapper.end())
+	if (mappedObject != objectMapper.end())
 	{
-		Entity* entity = mappedEntity->second;
-		entityMapper.erase(mappedEntity);
-		delete entity;
+		GameObject* object = mappedObject->second;
+		objectMapper.erase(mappedObject);
+		delete object;
 	}
 }
 
-Entity& Scene::GetEntity(std::string name)
+GameObject& Scene::Find(std::string name)
 {
-	return (*(entityMapper.find(name)->second));
+	return (*(objectMapper.find(name)->second));
 }
 
 std::string Scene::ToString()
@@ -140,10 +136,10 @@ std::string Scene::ToString()
 
 	ss << name << "[ ";
 
-	std::map<std::string, Entity* >::iterator entity;
-	for (entity = entityMapper.begin(); entity != entityMapper.end(); ++entity)
+	std::map<std::string, GameObject* >::iterator object;
+	for (object = objectMapper.begin(); object != objectMapper.end(); ++object)
 	{
-		ss << entity->first << " / ";
+		ss << object->first << " / ";
 	}
 
 	ss << " ]" << std::endl;
