@@ -1,6 +1,6 @@
 {
 	"name": "TestScene",
-	"entities": 
+	"objects": 
 	[
 		{
 			"name": "object1",
