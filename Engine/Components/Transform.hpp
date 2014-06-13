@@ -4,9 +4,8 @@
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/Math/Vector3.hpp"
 #include "Engine/Core/Math/Quaternion.hpp"
-#include "Engine/Components/Component.hpp"
 
-class Transform : public Component<Transform>
+class Transform : public anax::Component<Transform>
 {
 public:
 	Transform();
