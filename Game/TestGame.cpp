@@ -1,4 +1,5 @@
 #include "Game/TestGame.hpp"
+#include "Game/Scenes/TestScene.hpp"
 
 TestGame::TestGame()
 : Game()
@@ -13,7 +14,8 @@ TestGame::~TestGame()
 
 void TestGame::Initialize()
 {
-	Scene& scene = sceneManager->CreateScene("TestScene", Game::resourceManager->GetPath("Scenes/TestScene.json"));
+	TestScene scene;
+	sceneManager->AddScene("TestScene", scene);
 	sceneManager->ChangeScene("TestScene");
 	
 	Game::Log(scene.name);
