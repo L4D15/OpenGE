@@ -62,39 +62,3 @@ std::string ResourceManager::GetPath(std::string pathToFile)
 
     return absolutePath;
 }
-
-template <typename T>
-T& ResourceManager::GetAsset(const std::string filePath)
-{
-    int posLastSlash;
-    int posLastDot;
-
-    posLastSlash = filePath.find_last_of('/');
-    posLastDot = filePath.find_last_of('.');
-
-    std::string name;
-
-    name = filePath.substr(posLastSlash + 1, posLastDot);
-
-    std::map<std::string, Asset*>::iterator mappedAsset;
-
-    mappedAsset = assetMapper.find(name);
-
-    if (mappedAsset != assetMapper.end())
-    {
-        return (* static_cast<T*>(mappedAsset->second));
-    }
-    else
-    {
-        // Load the asset
-        T* asset;
-
-        asset = new T(name, filePath);
-
-        std::pair<std::string, Asset*> newAsset(name, asset);
-
-        assetMapper.insert(newAsset);
-
-        return (* asset);
-    }
-}
