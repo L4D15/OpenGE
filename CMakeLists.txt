@@ -31,7 +31,8 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
 # ============================================================================= #
 file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
 file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.cpp")
-file(GLOB_RECURSE GAME_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/*.cpp")
+file(GLOB_RECURSE ENGINE_ASSETS_SOURCE_FILES        "${CMAKE_SOURCE_DIR}/Engine/Assets/*.cpp")
+file(GLOB_RECURSE GAME_SOURCE_FILES                 "${CMAKE_SOURCE_DIR}/Game/*.cpp")
 
 # ============================================================================= #
 # Include directories
@@ -160,6 +161,7 @@ if(APPLE)
     set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/Game/Content/Icons/Icon.icns")
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_CORE_SOURCE_FILES}
                                                     ${ENGINE_COMPONENTS_SOURCE_FILES}
+                                                    ${ENGINE_ASSETS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
                                                     ${RESOURCE_IMAGES}
                                                     ${RESOURCE_SCRIPTS}
