@@ -12,7 +12,7 @@ protected:
 	virtual ~RenderizableAsset() { }
 
 public:
-	virtual void			Render const (const Vector3& pos, const Quaternion& rot, const Vector3& scale) = 0;
+	virtual void			Render (const Vector3& pos, const Quaternion& rot, const Vector3& scale) const = 0;
 
 };
 
