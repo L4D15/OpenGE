@@ -19,6 +19,9 @@ protected:
 	inline void					NotifyRelease() { if (usage > 0) --usage; }
 
 public:
+	virtual std::string			ToString() const = 0;
+
+public:
 	std::string					name;
 	std::string					filePath;
 
