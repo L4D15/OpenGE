@@ -44,7 +44,7 @@ std::string ResourceManager::GetPath(std::string pathToFile)
 
     // Take just the part we need
     absolutePath = absolutePath.substr(0, absolutePath.find("/MacOS/") + 1);
-    absolutePath.append("/Resources/");
+    absolutePath.append("Resources/");
 
 #elif __linux
 
