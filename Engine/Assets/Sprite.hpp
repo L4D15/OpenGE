@@ -11,7 +11,10 @@ protected:
 	Sprite(const std::string name, const std::string filePath);
 	virtual ~Sprite();
 
-	virtual void Render(const Vector3& pos, const Quaternion& rot, const Vector3& scale) const;
+	virtual void 				Render(const Vector3& pos, const Quaternion& rot, const Vector3& scale) const;
+
+public:
+	virtual std::string			ToString() const;
 
 	friend class ResourceManager;
 };
