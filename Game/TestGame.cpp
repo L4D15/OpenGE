@@ -14,12 +14,13 @@ TestGame::~TestGame()
 
 void TestGame::Initialize()
 {
-	//TestScene scene;
-	//sceneManager->AddScene("TestScene", scene);
-	sceneManager->CreateScene("TestScene", Game::resourceManager->GetPath("Scenes/TestScene.json"));
-	sceneManager->ChangeScene("TestScene");
+    TestScene* scene;
+    scene = new TestScene();
+    sceneManager->AddScene("TestScene", *scene);
 	
-	Scene& scene = sceneManager->GetCurrentScene();
-	Game::Log(scene.name);
-	Game::Log(scene.ToString());
+	//sceneManager->CreateScene("TestScene", Game::resourceManager->GetPath("Scenes/TestScene.json"));
+	sceneManager->ChangeScene("TestScene");
+
+    Scene& currentScene = sceneManager->GetCurrentScene();
+    Game::Log(currentScene.ToString());
 }
