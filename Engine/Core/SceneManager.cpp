@@ -55,7 +55,7 @@ Scene& SceneManager::AddScene(std::string sceneName, Scene& scene)
 }
 
 /**
-@brief	Changed the current scene.
+@brief	Changes the current scene.
 
 @return The current scene.
 */
