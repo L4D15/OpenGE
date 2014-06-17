@@ -6,7 +6,6 @@
 #include <map>
 
 class ResourceManager;
-class TestScene;
 
 class Sprite : public RenderizableAsset
 {
@@ -76,7 +75,6 @@ protected:
                  Animation>     animationsMapper;
 
     friend class ResourceManager;
-    friend class TestScene;
 };
 
 

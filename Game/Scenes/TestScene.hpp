@@ -10,16 +10,20 @@
 class TestScene : public Scene
 {
 public:
-	TestScene() : Scene("TestScene") { }
+    TestScene() : Scene("TestScene"), object(CreateGameObject("Object")) { }
 
 	void OnActivation()
 	{
-		GameObject& object = CreateGameObject("Object");
-
-		object.AddComponent<Transform>(1.0f, 1.0f, 1.0f);
+        object.AddComponent<Transform>(12.0f, 16.0f, 1.0f);
 	}
 
 	virtual ~TestScene() { }
+
+    void Render()
+    {
+        
+    }
+    GameObject& object;
 	
 };
 
