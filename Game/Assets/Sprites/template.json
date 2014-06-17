@@ -1,0 +1,38 @@
+{
+  "animations":
+  [
+    {
+      "name": "Back",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0,
+      "oscillate": true
+    },
+    {
+      "name": "Left",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0,
+      "oscillate": true
+    },
+    {
+      "name": "Front",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0,
+      "oscillate": true
+    },
+    {
+      "name": "Right",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0,
+      "oscillate": true
+    }
+  ],
+  "default_animation": "Front"
+}

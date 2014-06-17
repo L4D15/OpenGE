@@ -1,6 +1,8 @@
 #ifndef OPENGE_TIME_H
 #define OPENGE_TIME_H
 
+#include "Engine/Libraries/Libraries.hpp"
+
 class Time
 {
 public:
@@ -10,6 +12,7 @@ public:
 	void					Update();
 	int						GetFPS();
 	void					WaitForNextFrame();
+    inline const Uint32     GetTime() const { return SDL_GetTicks(); }
 
 public:
 	static float			deltaTime;

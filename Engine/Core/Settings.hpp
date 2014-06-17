@@ -6,7 +6,7 @@ class Settings
 public:
 	Settings()
 	{
-		maxFPS = 60;
+        maxFPS = 60;
 	}
 
 	~Settings()

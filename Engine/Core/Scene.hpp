@@ -2,22 +2,45 @@
 #define OPENGE_SCENE_H
 
 #include "Engine/Libraries/Libraries.hpp"
-#include <list>
+#include "Engine/Core/GameObject.hpp"
+#include "Engine/Systems/SpriteRendering.hpp"
+#include <string>
+#include <map>
+
+using namespace anax;
+using namespace Systems;
 
 class Scene
 {
 public:
-	Scene();
+	Scene(std::string name);
+	Scene(std::string name, std::string filePath);
 	~Scene();
 
 	virtual void				OnActivation();
 	virtual void				OnDeactivation();
 
-	void						Update();
-	void						Render();
+	virtual void				Update();
+	virtual void				Render();
 
-protected:
+	GameObject&					CreateGameObject(std::string name);
+	void						RenameGameObject(std::string name, std::string newName);
+	void						DeleteGameObject(std::string name);
+	GameObject&					Find(std::string name);
 
+	std::string					ToString();
+
+public:
+	std::string					name;
+	std::map<
+		std::string,
+		GameObject* >			objectMapper;
+
+private:
+	World						world;
+
+    // Basic Systems
+    SpriteRendering             spriteRendering;
 	
 };
 

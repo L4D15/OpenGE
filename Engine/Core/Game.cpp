@@ -1,16 +1,20 @@
 #include "Engine/Core/Game.hpp"
+#include "Engine/Assets/Sprite.hpp"
 #include <assert.h>
 
 using namespace std;
 
 // Static initialization
-bool 			Game::instantiated 	= false;
-bool 			Game::run 			= false;
-Window* 		Game::window 		= NULL;
-Time* 			Game::time 			= NULL;
-Settings* 		Game::settings 		= NULL;
-EventManager* 	Game::eventManager 	= NULL;
-Input*			Game::input 		= NULL;
+bool 				Game::instantiated 		= false;
+bool 				Game::run 				= false;
+Window* 			Game::window 			= NULL;
+Time* 				Game::time 				= NULL;
+Settings* 			Game::settings 			= NULL;
+EventManager* 		Game::eventManager 		= NULL;
+SceneManager*		Game::sceneManager 		= NULL;
+ResourceManager* 	Game::resourceManager 	= NULL;
+Input*				Game::input 			= NULL;
+Scripting*			Game::scripting 		= NULL;
 // ---
 
 Game::Game()
@@ -25,9 +29,14 @@ Game::Game()
 
 Game::~Game()
 {
-	delete window;
 	delete time;
 	delete settings;
+	delete eventManager;
+	delete sceneManager;
+	delete resourceManager;
+	delete input;
+	delete scripting;
+	delete window;
 	SDL_Quit();
 	TTF_Quit();
 }
@@ -93,12 +102,42 @@ void Game::InitializeEventManagement()
 	input = new Input();
 }
 
+void Game::InitializeSceneManager()
+{
+	sceneManager = new SceneManager();
+	sceneManager->CreateScene("DefaultScene");
+	sceneManager->ChangeScene("DefaultScene");
+}
+
+void Game::InitializeResourceManager()
+{
+	resourceManager = new ResourceManager();
+    resourceManager->GetAsset<Sprite>("Assets/Sprites/Missing_Image.png");
+}
+
+void Game::InitializeScripting()
+{
+	scripting = new Scripting();
+	scripting->CreateEnvironment();
+}
+
+void Game::Initialize()
+{
+
+}
+
 void Game::Start()
 {
 	InitializeLibraries();
 	InitializeSettings();
 	InitializeWindow();
 	InitializeTime();
+	InitializeSceneManager();
+	InitializeEventManagement();
+	InitializeScripting();
+    InitializeResourceManager();
+
+	Initialize();
 
 	run = true;
 	MainLoop();
@@ -124,6 +163,7 @@ void Game::HandleEvents()
 void Game::Update()
 {
 	time->Update();
+	sceneManager->OnLoop();
 }
 
 void Game::Render()
@@ -131,6 +171,7 @@ void Game::Render()
 	window->Clear();
 
 	// Draw stuff
+	sceneManager->OnRender();
 
 	window->Draw();
 }
