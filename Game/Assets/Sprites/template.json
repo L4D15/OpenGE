@@ -1,0 +1,33 @@
+{
+  "animations":
+  [
+    {
+      "name": "Back",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0
+    },
+    {
+      "name": "Left",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0
+    },
+    {
+      "name": "Front",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0
+    },
+    {
+      "name": "Right",
+      "width": 24,
+      "height": 32,
+      "frames": 3,
+      "frame-rate": 3.0
+    }
+  ]
+}
