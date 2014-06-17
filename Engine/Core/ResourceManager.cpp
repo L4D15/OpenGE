@@ -46,14 +46,20 @@ std::string ResourceManager::GetPath(std::string pathToFile)
     absolutePath = absolutePath.substr(0, absolutePath.find("/MacOS/") + 1);
     absolutePath.append("Resources/");
 
-#elif __linux
+#else
+#if __linux
 
-#elif _WIN32
+#else
+#if _WIN32
 
-#elif _WIN64
+#else
+#if _WIN64
 
 #else
     STUBBED("ResourceManage::getPath - Missing code for this platform.");
+#endif
+#endif
+#endif
 #endif
 
     absolutePath.append(pathToFile);
