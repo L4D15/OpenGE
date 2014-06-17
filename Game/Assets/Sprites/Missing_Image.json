@@ -1,0 +1,12 @@
+{
+  "animations":
+  [
+    {
+      "name": "Static",
+      "width": 32,
+      "height": 32,
+      "frames": 1,
+      "frame-rate": 1.0
+    }
+  ]
+}
