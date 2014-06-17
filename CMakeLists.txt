@@ -120,7 +120,7 @@ set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INC
 # ============================================================================= #
 
 # Images
-file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Images/*")
+file(GLOB_RECURSE RESOURCE_SPRITES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*")
 
 # Scripts
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*.lua")
@@ -131,9 +131,9 @@ file(GLOB_RECURSE RESOURCE_SCENES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes/*.jso
 # Mac OS X Bundle
 if(APPLE)
     set_source_files_properties(
-        ${RESOURCE_IMAGES}
+        ${RESOURCE_SPRITES}
         PROPERTIES
-        MACOSX_PACKAGE_LOCATION "Resources/Assets/Images")
+        MACOSX_PACKAGE_LOCATION "Resources/Assets/Sprites")
     set_source_files_properties(
         ${RESOURCE_SCRIPTS}
         PROPERTIES
@@ -163,7 +163,7 @@ if(APPLE)
                                                     ${ENGINE_COMPONENTS_SOURCE_FILES}
                                                     ${ENGINE_ASSETS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
-                                                    ${RESOURCE_IMAGES}
+                                                    ${RESOURCE_SPRITES}
                                                     ${RESOURCE_SCRIPTS}
                                                     ${RESOURCE_SCENES})
 else(APPLE)
