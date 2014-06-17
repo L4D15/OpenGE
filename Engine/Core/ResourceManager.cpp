@@ -1,4 +1,5 @@
 #include "Engine/Core/ResourceManager.hpp"
+#include "Engine/Assets/Sprite.hpp"
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/operations.hpp>
 #include <boost/filesystem/path.hpp>
@@ -11,12 +12,15 @@ namespace fs = boost::filesystem;
 
 ResourceManager::ResourceManager()
 {
-
+  // Load the Missing_Image sprite
 }
 
 ResourceManager::~ResourceManager()
 {
-
+    for (auto asset : assetMapper)
+    {
+        delete asset.second;
+    }
 }
 
 std::string ResourceManager::GetWorkingPath()
@@ -63,8 +67,6 @@ std::string ResourceManager::GetPath(std::string pathToFile)
 #endif
 
     absolutePath.append(pathToFile);
-
-    std::cout << absolutePath << std::endl;
 
     return absolutePath;
 }

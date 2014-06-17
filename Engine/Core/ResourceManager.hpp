@@ -4,6 +4,7 @@
 #include <string>
 #include "Engine/Assets/Asset.hpp"
 #include <map>
+#include <iostream>
 
 class ResourceManager
 {
@@ -19,6 +20,8 @@ public:
 	{
 	    int posLastSlash;
 	    int posLastDot;
+
+        filePath = GetPath(filePath);
 
 	    posLastSlash = filePath.find_last_of('/');
 	    posLastDot = filePath.find_last_of('.');

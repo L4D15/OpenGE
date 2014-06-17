@@ -3,10 +3,12 @@
 
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/GameObject.hpp"
+#include "Engine/Systems/SpriteRendering.hpp"
 #include <string>
 #include <map>
 
 using namespace anax;
+using namespace Systems;
 
 class Scene
 {
@@ -36,6 +38,9 @@ public:
 
 private:
 	World						world;
+
+    // Basic Systems
+    SpriteRendering             spriteRendering;
 	
 };
 

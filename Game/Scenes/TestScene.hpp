@@ -4,6 +4,7 @@
 #include "Engine/Core/Scene.hpp"
 #include "Engine/Core/GameObject.hpp"
 #include "Engine/Components/Transform.hpp"
+#include "Engine/Components/SpriteRenderer.hpp"
 #include "Engine/Assets/Sprite.hpp"
 #include "Engine/Core/Game.hpp"
 
@@ -15,14 +16,11 @@ public:
 	void OnActivation()
 	{
         object.AddComponent<Transform>(12.0f, 16.0f, 1.0f);
+        object.AddComponent<SpriteRenderer>("Assets/Sprites/template.png");
 	}
 
 	virtual ~TestScene() { }
 
-    void Render()
-    {
-        
-    }
     GameObject& object;
 	
 };
