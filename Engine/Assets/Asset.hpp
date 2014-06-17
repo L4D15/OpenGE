@@ -4,21 +4,31 @@
 #include <string>
 #include "Engine/Libraries/Libraries.hpp"
 
+enum class AssetType { Sprite, Audio, Text, Texture, Script, None};
+
+class ResourceManager;
+
 class Asset
 {
 protected:
-	Asset(const std::string name) : name(name) { };
-	virtual ~Asset();
+	Asset(const std::string name, const std::string filePath) : name(name), filePath(filePath) { usage = 1; }
+	virtual ~Asset() { }
 
-	inline Uint16 const Usage() { return usage; }
-	inline void			NotifyUse() { ++usage; }
-	inline void			NotifyRelease() { if (usage > 0) --usage; }
+	inline Uint16				GetUsage () const { return usage; }
+	inline void					NotifyUse() { ++usage; }
+	inline void					NotifyRelease() { if (usage > 0) --usage; }
 
 public:
-	std::name			name;
+	virtual std::string			ToString() const = 0;
+
+public:
+	std::string					name;
+	std::string					filePath;
 
 protected:
-	Uint16				usage;
+	Uint16						usage;
+
+	friend class ResourceManager;
 };
 
 #endif // OPENGE_ASSET_H

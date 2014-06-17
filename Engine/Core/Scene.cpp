@@ -60,6 +60,7 @@ Scene::Scene(std::string name, std::string filePath)
 		ss << "[!] -- Scene::Scene() - Error, JSON file " << jsonFilePath << " couldn't be parsed.";
 		Game::Log(ss.str());
 	}
+    file.close();
 }
 
 Scene::~Scene()

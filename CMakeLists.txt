@@ -29,9 +29,10 @@ set(CMAKE_CXX_FLAGS ${CMAKE_CXX_FLAGS} "-std=c++11")
 # ============================================================================= #
 # Source Files
 # ============================================================================= #
-file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/Core/*.cpp")
-file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.cpp")
-file(GLOB_RECURSE GAME_SOURCE_FILES "${CMAKE_SOURCE_DIR}/Game/*.cpp")
+file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/Core/*.*pp")
+file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.*pp")
+file(GLOB_RECURSE ENGINE_ASSETS_SOURCE_FILES        "${CMAKE_SOURCE_DIR}/Engine/Assets/*.*pp")
+file(GLOB_RECURSE GAME_SOURCE_FILES                 "${CMAKE_SOURCE_DIR}/Game/*.*pp")
 
 # ============================================================================= #
 # Include directories
@@ -119,20 +120,20 @@ set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INC
 # ============================================================================= #
 
 # Images
-file(GLOB_RECURSE RESOURCE_IMAGES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Images/*")
+file(GLOB_RECURSE RESOURCE_SPRITES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*")
 
 # Scripts
-file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*")
+file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*.lua")
 
 # Scenes
-file(GLOB_RECURSE RESOURCE_SCENES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes/*")
+file(GLOB_RECURSE RESOURCE_SCENES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes/*.json")
 
 # Mac OS X Bundle
 if(APPLE)
     set_source_files_properties(
-        ${RESOURCE_IMAGES}
+        ${RESOURCE_SPRITES}
         PROPERTIES
-        MACOSX_PACKAGE_LOCATION "Resources/Assets/Images")
+        MACOSX_PACKAGE_LOCATION "Resources/Assets/Sprites")
     set_source_files_properties(
         ${RESOURCE_SCRIPTS}
         PROPERTIES
@@ -160,8 +161,9 @@ if(APPLE)
     set(MACOSX_BUNDLE_ICON_FILE "${CMAKE_SOURCE_DIR}/Game/Content/Icons/Icon.icns")
     add_executable(${PROJECT_NAME} MACOSX_BUNDLE    ${ENGINE_CORE_SOURCE_FILES}
                                                     ${ENGINE_COMPONENTS_SOURCE_FILES}
+                                                    ${ENGINE_ASSETS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
-                                                    ${RESOURCE_IMAGES}
+                                                    ${RESOURCE_SPRITES}
                                                     ${RESOURCE_SCRIPTS}
                                                     ${RESOURCE_SCENES})
 else(APPLE)
