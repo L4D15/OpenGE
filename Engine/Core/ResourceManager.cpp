@@ -13,7 +13,6 @@ namespace fs = boost::filesystem;
 ResourceManager::ResourceManager()
 {
   // Load the Missing_Image sprite
-  GetAsset<Sprite>(GetPath("Assets/Sprites/Missing_Image.png"));
 }
 
 ResourceManager::~ResourceManager()
@@ -68,8 +67,6 @@ std::string ResourceManager::GetPath(std::string pathToFile)
 #endif
 
     absolutePath.append(pathToFile);
-
-    std::cout << absolutePath << std::endl;
 
     return absolutePath;
 }

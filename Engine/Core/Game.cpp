@@ -1,4 +1,5 @@
 #include "Engine/Core/Game.hpp"
+#include "Engine/Assets/Sprite.hpp"
 #include <assert.h>
 
 using namespace std;
@@ -111,6 +112,7 @@ void Game::InitializeSceneManager()
 void Game::InitializeResourceManager()
 {
 	resourceManager = new ResourceManager();
+    resourceManager->GetAsset<Sprite>("Assets/Sprites/Missing_Image.png");
 }
 
 void Game::InitializeScripting()
@@ -132,8 +134,8 @@ void Game::Start()
 	InitializeTime();
 	InitializeSceneManager();
 	InitializeEventManagement();
-	InitializeResourceManager();
 	InitializeScripting();
+    InitializeResourceManager();
 
 	Initialize();
 

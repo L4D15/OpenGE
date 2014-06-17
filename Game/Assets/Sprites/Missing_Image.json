@@ -6,7 +6,9 @@
       "width": 32,
       "height": 32,
       "frames": 1,
-      "frame-rate": 1.0
+      "frame-rate": 1.0,
+      "oscillate": false
     }
-  ]
+  ],
+    "default_animation": "Static"
 }

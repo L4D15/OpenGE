@@ -26,6 +26,9 @@ public:
 
 	void				AddComponents(json_spirit::Array jsonArray);
 
+    inline void         Activate() { entity.activate(); }
+    inline void         Deactivate() { entity.deactivate(); }
+
 protected:
 	std::string 		name;
 	anax::Entity 		entity;

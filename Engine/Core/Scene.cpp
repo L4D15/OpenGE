@@ -10,7 +10,7 @@ using namespace anax;
 Scene::Scene(std::string name)
 : name(name)
 {
-	
+    world.addSystem(spriteRendering);
 }
 
 /**
@@ -61,6 +61,9 @@ Scene::Scene(std::string name, std::string filePath)
 		Game::Log(ss.str());
 	}
     file.close();
+
+    // Add systems to world
+    world.addSystem(spriteRendering);
 }
 
 Scene::~Scene()
@@ -80,12 +83,12 @@ void Scene::OnDeactivation()
 
 void Scene::Update()
 {
-
+    world.refresh();
 }
 
 void Scene::Render()
 {
-
+    spriteRendering.Render();
 }
 
 GameObject& Scene::CreateGameObject(std::string name)
@@ -93,6 +96,8 @@ GameObject& Scene::CreateGameObject(std::string name)
 	GameObject* gameObject;
 
 	Entity entity = world.createEntity();
+
+    entity.activate();
 
 	gameObject = new GameObject(name, entity);
 

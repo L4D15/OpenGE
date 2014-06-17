@@ -33,6 +33,7 @@ Sprite::Sprite(const std::string name, const std::string filePath)
       std::string name;
       int w, h, frames;
       float frameRate;
+      bool oscillate;
 
       int heightAcum = 0;
 
@@ -43,10 +44,13 @@ Sprite::Sprite(const std::string name, const std::string filePath)
         h = animations[index].getObject().at("height").getInt();
         frames = animations[index].getObject().at("frames").getInt();
         frameRate = animations[index].getObject().at("frame-rate").getReal();
+        oscillate = animations[index].getObject().at("oscillate").getBool();
 
-        AddAnimation(name, 0, heightAcum, w, h, frames, frameRate);
+        AddAnimation(name, 0, heightAcum, w, h, frames, frameRate, oscillate);
         heightAcum += h;
       }
+
+      defaultAnimation = root.getObject().at("default_animation").getString();
 
       // Load image
       texture = IMG_LoadTexture(Game::window->renderer, filePath.c_str());
@@ -56,7 +60,7 @@ Sprite::Sprite(const std::string name, const std::string filePath)
     {
         std::stringstream ss;
 
-        ss << "-- [!] Sprite::Sprite() - Error, JSON file" << jsonFilePath << " couldn't be parsed.";
+        ss << "-- [!] Sprite::Sprite() - Error, JSON file " << jsonFilePath << " couldn't be parsed.";
         Game::Log(ss.str());
     }
     file.close();
@@ -141,15 +145,27 @@ void Sprite::Render(const string animation, const unsigned int frame, const Vect
  * @param frames
  * @param frameRate
  */
-void Sprite::AddAnimation(const string name, const int x, const int y, const int w, const int h, const int frames, const float frameRate)
+void Sprite::AddAnimation(const string name, const int x, const int y, const int w, const int h, const int frames, const float frameRate, const bool oscillate)
 {
     Animation* animation;
 
-    animation = new Animation(x, y, w, h, frames, frameRate, name);
+    animation = new Animation(x, y, w, h, frames, frameRate, oscillate, name);
 
     std::pair<std::string, Animation> mappedAnimation(name, *animation);
 
     animationsMapper.insert(mappedAnimation);
+}
+
+/**
+ * @brief [brief description]
+ * @details [long description]
+ * 
+ * @param name [description]
+ * @return [description]
+ */
+const Sprite::Animation& Sprite::GetAnimation(const std::string name) const
+{
+  return animationsMapper.find(name)->second;
 }
 
 /**

@@ -10,11 +10,16 @@
 					"name": "Transform",
 					"position":
 					{
-						"x": 1.0,
-						"y": 2.5,
-						"z": 3.0
+                        "x": 12.0,
+                        "y": 16.0,
+                        "z": 0.0
 					}
-				}
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/template.png"
+                }
+
 			]
 		}
 	]
