@@ -6,6 +6,9 @@
 #include "Engine/Core/Math/Vector3.hpp"
 #include "Engine/Core/Math/Quaternion.hpp"
 
+namespace Components
+{
+
 class SpriteRenderer : public anax::Component<SpriteRenderer>
 {
 public:
@@ -27,5 +30,6 @@ protected:
 private:
     bool                        animGoingRight;    
 };
+}
 
 #endif // SPRITERENDERER_HPP

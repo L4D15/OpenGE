@@ -5,6 +5,9 @@
 #include "Engine/Core/Math/Vector3.hpp"
 #include "Engine/Core/Math/Quaternion.hpp"
 
+namespace Components
+{
+
 class Transform : public anax::Component<Transform>
 {
 public:
@@ -23,5 +26,6 @@ public:
 	Quaternion 			rotation;
 	Vector3				scale;
 };
+}
 
 #endif // OPENGE_TRANSFORM_H

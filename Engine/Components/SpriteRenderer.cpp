@@ -2,6 +2,8 @@
 #include "Engine/Core/Game.hpp"
 #include <sstream>
 
+using namespace Components;
+
 /**
  * @brief SpriteRenderer::SpriteRenderer
  */

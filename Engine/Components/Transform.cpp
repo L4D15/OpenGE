@@ -1,6 +1,8 @@
 #include "Engine/Components/Transform.hpp"
 #include <sstream>
 
+using namespace Components;
+
 Transform::Transform()
 : position(), rotation(), scale(1.0f, 1.0f, 1.0f)
 {
