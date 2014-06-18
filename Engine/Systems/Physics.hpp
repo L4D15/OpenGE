@@ -1,5 +1,5 @@
-#ifndef PHYSICS_HPP
-#define PHYSICS_HPP
+#ifndef OPENGE_SYSTEMS_PHYSICS_HPP
+#define OPENGE_SYSTEMS_PHYSICS_HPP
 
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/Math/Vector3.hpp"
