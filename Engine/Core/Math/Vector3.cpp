@@ -2,6 +2,8 @@
 #include "Engine/Core/Math/Vector2.hpp"
 #include "Engine/Core/Math/Math.hpp"
 #include <sstream>
+#include <luabind/luabind.hpp>
+#include <luabind/operator.hpp>
 
 /**
  * @brief Default constructor.
@@ -252,4 +254,31 @@ std::string Vector3::ToString()
     str << "(" << x << "," << y << "," << z << ")";
 
     return str.str();
+}
+
+using namespace luabind;
+
+/**
+ * @brief Vector3::RegisterForScripting
+ */
+luabind::scope Vector3::RegisterForScripting()
+{
+    return
+    class_<Vector3>("Vector3")
+        .def(constructor<float, float, float>())
+        .def(constructor<Vector3>())
+        .def(constructor<>())
+        .def(self + Vector3())
+        .def(self - Vector3())
+        .def(self * Vector3())
+        .def(self * float())
+        .def("DotProduct", &Vector3::DotProduct)
+        .def("LengthQuadratic", &Vector3::LengthQuadratic)
+        .def("Length", &Vector3::Length)
+        .def("DistanceQuadratic", &Vector3::DistanceQuadratic)
+        .def("Distance", &Vector3::Distance)
+        .def("Normalized", &Vector3::Normalized)
+        .def("ToVector2D", &Vector3::ToVector2D)
+        .def("ToString", &Vector3::ToString)
+     ;
 }

@@ -1,6 +1,7 @@
 #include "Engine/Core/Game.hpp"
 #include "Engine/Assets/Sprite.hpp"
 #include <assert.h>
+#include <luabind/scope.hpp>
 
 using namespace std;
 
@@ -191,4 +192,15 @@ void Game::Log(string text, bool endLine)
 	{
 		printf("%s", text.c_str());
 	}
+}
+
+using namespace luabind;
+
+luabind::scope Game::RegisterForScripting()
+{
+    return class_<Game>("Game")
+            .scope
+            [
+                def("Log", &Game::Log)
+            ];
 }

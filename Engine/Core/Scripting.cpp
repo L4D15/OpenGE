@@ -1,6 +1,8 @@
 #include "Engine/Core/Scripting.hpp"
 #include "Engine/Core/Game.hpp"
 #include "Engine/Core/Color.hpp"
+#include "Engine/Core/Math/Vector3.hpp"
+#include <luabind/operator.hpp>
 
 
 Scripting::Scripting()
@@ -47,10 +49,9 @@ void Scripting::CreateEnvironment()
 {
 	using namespace luabind;
 
-	module(state)
+    module(state)
 	[
-		class_<Color>("Color")
-			.def(constructor<int, int, int, int>())
-			.def("ToString", &Color::ToString)
+        Vector3::RegisterForScripting(),
+        Game::RegisterForScripting()
 	];
 }

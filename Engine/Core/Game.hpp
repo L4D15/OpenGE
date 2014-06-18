@@ -11,6 +11,7 @@
 #include "Engine/Core/Input.hpp"
 #include "Engine/Core/Scripting.hpp"
 #include <string>
+#include <luabind/luabind.hpp>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ public:
 
 	static void				Terminate();
 	static void				Log(string text, bool endLine = true);
+    static luabind::scope   RegisterForScripting();
 
 private:
 	void					InitializeLibraries();
