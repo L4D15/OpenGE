@@ -8,6 +8,8 @@
 #include "Engine/Assets/Sprite.hpp"
 #include "Engine/Core/Game.hpp"
 
+using namespace Components;
+
 class TestScene : public Scene
 {
 public:

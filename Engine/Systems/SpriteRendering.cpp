@@ -5,7 +5,7 @@
 using namespace Systems;
 
 SpriteRendering::SpriteRendering()
-: Base(anax::ComponentFilter().requires<Transform, SpriteRenderer>())
+    : Base(anax::ComponentFilter().requires<Components::Transform, Components::SpriteRenderer>())
 {
 	
 }
@@ -20,8 +20,8 @@ void SpriteRendering::Render() const
 	auto entities = getEntities();
 	for (auto& entity : entities)
 	{
-		Transform& transform = entity.getComponent<Transform>();
-		SpriteRenderer& sprite = entity.getComponent<SpriteRenderer>();
+        Components::Transform& transform = entity.getComponent<Components::Transform>();
+        Components::SpriteRenderer& sprite = entity.getComponent<Components::SpriteRenderer>();
 
 		sprite.Render(	transform.position,
 						transform.rotation,
