@@ -4,6 +4,7 @@
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/GameObject.hpp"
 #include "Engine/Systems/SpriteRendering.hpp"
+#include "Engine/Systems/Physics.hpp"
 #include <string>
 #include <map>
 
@@ -41,6 +42,7 @@ private:
 
     // Basic Systems
     SpriteRendering             spriteRendering;
+    Physics                     physics;
 	
 };
 

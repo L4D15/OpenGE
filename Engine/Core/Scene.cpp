@@ -11,6 +11,7 @@ Scene::Scene(std::string name)
 : name(name)
 {
     world.addSystem(spriteRendering);
+    world.addSystem(physics);
 }
 
 /**
@@ -64,6 +65,7 @@ Scene::Scene(std::string name, std::string filePath)
 
     // Add systems to world
     world.addSystem(spriteRendering);
+    world.addSystem(physics);
 }
 
 Scene::~Scene()
@@ -84,6 +86,7 @@ void Scene::OnDeactivation()
 void Scene::Update()
 {
     world.refresh();
+    physics.Update();
 }
 
 void Scene::Render()

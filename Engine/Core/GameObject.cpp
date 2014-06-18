@@ -1,8 +1,11 @@
 #include "Engine/Core/GameObject.hpp"
 #include "Engine/Components/Transform.hpp"
 #include "Engine/Components/SpriteRenderer.hpp"
+#include "Engine/Components/Physics.hpp"
 #include "Engine/Core/Game.hpp"
 #include <boost/filesystem.hpp>
+
+using namespace Components;
 
 /**
 @brief		Parses the json list provided and adds the corresponding components to the object.
@@ -37,7 +40,10 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
             {
                 AddComponent<SpriteRenderer>(spritePath);
             }
-
+        }
+        else if (componentName == "Physics")
+        {
+            AddComponent<Components::Physics>(jsonArray[compIndex].getObject());
         }
 	}
 }

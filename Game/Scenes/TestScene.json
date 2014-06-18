@@ -18,6 +18,25 @@
                 {
                     "name": "SpriteRenderer",
                     "sprite_path": "Assets/Sprites/template.png"
+                },
+                {
+                    "name": "Physics",
+                    "velocity":
+                    {
+                        "x": 100,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "aceleration":
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    },
+                    "mass": 1,
+                    "linear_drag": 1.0,
+                    "angular_drag": 1.0,
+                    "kinematic": false
                 }
 
 			]
