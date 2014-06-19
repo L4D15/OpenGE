@@ -25,7 +25,6 @@ void ScriptProcessing::Update() const
 
 		// Set the owner of the script as the global 'self' lua variable
 		Game::scripting->SetGlobal<GameObject&>("self", *script.owner);
-
 		script.Update();
 	}
 }

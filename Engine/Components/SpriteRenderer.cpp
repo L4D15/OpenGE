@@ -28,12 +28,6 @@ SpriteRenderer::SpriteRenderer(const std::string spritePath)
     currentFrame = 0;
     frameDuration = 1000.0f / currentAnimation->frameRate;
     animGoingRight = true;
-
-    std::stringstream ss;
-
-    ss << "Frame Duration: " << frameDuration;
-
-    Game::Log(ss.str());
 }
 
 /**

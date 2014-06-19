@@ -22,6 +22,11 @@ public:
 
 	void OnActivation()
 	{
+        // Map keys
+        Game::input->MapButton("Walk Right", "Arrow Right");
+        Game::input->MapButton("Walk Left", "Arrow Left");
+        std::cout << Game::input << std::endl;
+
         object.AddComponent<Transform>(12.0f, 16.0f, 1.0f);
         object.AddComponent<SpriteRenderer>("Assets/Sprites/template.png");
         Script& script = object.AddComponent<Script>(&object, "Assets/Scripts/FixedMovement.lua");
