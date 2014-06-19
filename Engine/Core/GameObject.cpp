@@ -74,5 +74,6 @@ scope GameObject::RegisterForScripting()
                 .property("name", &GameObject::GetName, &GameObject::SetName)
                 .def("AddComponent", (void (GameObject::*) (std::string)) &GameObject::AddComponent)
                 .def("GetComponent_Transform", &GameObject::GetTransform)
+                .def("GetComponent_SpriteRenderer", &GameObject::GetSpriteRenderer)
             ;
 }

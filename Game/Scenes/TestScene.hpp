@@ -23,9 +23,10 @@ public:
 	void OnActivation()
 	{
         // Map keys
-        Game::input->MapButton("Walk Right", "Arrow Right");
-        Game::input->MapButton("Walk Left", "Arrow Left");
-        std::cout << Game::input << std::endl;
+        Game::input->MapButton("Walk Right",    "Arrow Right");
+        Game::input->MapButton("Walk Left",     "Arrow Left");
+        Game::input->MapButton("Walk Up",       "Arrow Up");
+        Game::input->MapButton("Walk Down",     "Arrow Down");
 
         object.AddComponent<Transform>(12.0f, 16.0f, 1.0f);
         object.AddComponent<SpriteRenderer>("Assets/Sprites/template.png");

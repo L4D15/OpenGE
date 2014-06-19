@@ -3,6 +3,7 @@
 
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Components/Transform.hpp"
+#include "Engine/Components/SpriteRenderer.hpp"
 #include <string>
 #include <type_traits>
 
@@ -30,6 +31,7 @@ public:
     void                    AddComponent(const std::string name);
 
     Components::Transform&  GetTransform() { return GetComponent<Components::Transform>(); }
+    Components::SpriteRenderer& GetSpriteRenderer() { return GetComponent<Components::SpriteRenderer>(); }
 
     inline void             Activate() { entity.activate(); }
     inline void             Deactivate() { entity.deactivate(); }

@@ -79,3 +79,8 @@ void SpriteRenderer::Update()
         timeFrameStart = Game::time->GetTime();
     }
 }
+
+void SpriteRenderer::ChangeAnimation(const std::string name)
+{
+    currentAnimation = & (sprite.GetAnimation(name));
+}
