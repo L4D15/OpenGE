@@ -11,6 +11,7 @@
 #include "Engine/Core/Input.hpp"
 #include "Engine/Core/Scripting.hpp"
 #include <string>
+#include <luabind/luabind.hpp>
 
 using namespace std;
 
@@ -30,6 +31,7 @@ public:
 
 	static void				Terminate();
 	static void				Log(string text, bool endLine = true);
+    static luabind::scope   RegisterForScripting();
 
 private:
 	void					InitializeLibraries();
@@ -59,6 +61,13 @@ public:
 	static ResourceManager*	resourceManager;
 	static Input*			input;
 	static Scripting*		scripting;
+
+    // Getters required for luabind (because it can't bind static variables)
+    static Time&            GetTime() { return *time; }
+    static Settings&        GetSettings() { return *settings; }
+    static ResourceManager& GetResourceManager() { return *resourceManager; }
+    static Input&           GetInput() { return *input; }
+    static SceneManager&    GetSceneManager() { return *sceneManager; }
 	
 };
 

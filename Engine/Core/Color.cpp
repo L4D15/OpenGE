@@ -1,5 +1,6 @@
 #include "Engine/Core/Color.hpp"
 #include <sstream>
+#include <luabind/luabind.hpp>
 
 Color::Color()
 {
@@ -193,7 +194,7 @@ Uint32 Color::ToPixelValue(SDL_PixelFormat* format)
     return SDL_MapRGBA(format, this->color.r, this->color.g, this->color.b, this->color.a);
 }
 
-const std::string Color::ToString()
+std::string Color::ToString()
 {
     std::stringstream stream;
 
@@ -203,4 +204,25 @@ const std::string Color::ToString()
             << " alpha: " << this->color.a;
 
     return stream.str();
+}
+
+using namespace luabind;
+
+scope Color::RegisterForScripting()
+{
+    return
+            class_<Color>("Color")
+                .def(constructor<>())
+                .def(constructor<int, int, int, int>())
+                .def(constructor<const char*, Uint8>())
+                .def(constructor<Color&>())
+                .def("Red", &Color::GetRed)
+                .def("Green", &Color::GetGreen)
+                .def("Blue", &Color::GetBlue)
+                .def("Alpha", &Color::GetAlpha)
+                .def("Red", &Color::SetRed)
+                .def("Green", &Color::SetGreen)
+                .def("Blue", &Color::SetBlue)
+                .def("ToString", &Color::ToString)
+            ;
 }

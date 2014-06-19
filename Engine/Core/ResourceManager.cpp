@@ -70,3 +70,11 @@ std::string ResourceManager::GetPath(std::string pathToFile)
 
     return absolutePath;
 }
+
+luabind::scope ResourceManager::RegisterForScripting()
+{
+    return
+            luabind::class_<ResourceManager>("ResourceManager")
+                .def("GetSprite", &ResourceManager::GetAsset<Sprite>)
+            ;
+}

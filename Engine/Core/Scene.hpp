@@ -5,6 +5,7 @@
 #include "Engine/Core/GameObject.hpp"
 #include "Engine/Systems/SpriteRendering.hpp"
 #include "Engine/Systems/Physics.hpp"
+#include "Engine/Systems/ScriptProcessing.hpp"
 #include <string>
 #include <map>
 
@@ -16,7 +17,8 @@ class Scene
 public:
 	Scene(std::string name);
 	Scene(std::string name, std::string filePath);
-	~Scene();
+    Scene(const Scene& other);
+    virtual ~Scene();
 
 	virtual void				OnActivation();
 	virtual void				OnDeactivation();
@@ -31,6 +33,8 @@ public:
 
 	std::string					ToString();
 
+    static luabind::scope       RegisterForScripting();
+
 public:
 	std::string					name;
 	std::map<
@@ -43,6 +47,7 @@ private:
     // Basic Systems
     SpriteRendering             spriteRendering;
     Physics                     physics;
+    ScriptProcessing			scriptProcessing;
 	
 };
 

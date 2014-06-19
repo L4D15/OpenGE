@@ -9,7 +9,7 @@ public:
 	EventManager();
 	~EventManager();
 
-	void				ProcessEvents();
+    void				ProcessEvents();
 
 protected:
 	void				ProcessEvent(SDL_Event* event);

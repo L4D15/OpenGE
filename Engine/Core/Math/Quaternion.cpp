@@ -1,6 +1,8 @@
 #include "Engine/Core/Math/Quaternion.hpp"
 #include "Engine/Core/Math/Math.hpp"
 #include <sstream>
+#include <luabind/luabind.hpp>
+#include <luabind/operator.hpp>
 
 Quaternion::Quaternion()
 : w(0.0), x(0.0), y(0.0), z(0.0)
@@ -68,7 +70,7 @@ float Quaternion::DotProduct(const Quaternion& other)
 
 float Quaternion::Length()
 {
-	return math::squareRoot(w * w + x * x + y * y + z * z);
+	return Math::SquareRoot(w * w + x * x + y * y + z * z);
 }
 
 float Quaternion::LengthQuadratic()
@@ -92,7 +94,7 @@ Quaternion Quaternion::Normalized()
 	}
 	else
 	{
-		float recip = math::inverseSquareRoot(length);
+		float recip = Math::InverseSquareRoot(length);
 
 		normalized = normalized * recip;
 	}

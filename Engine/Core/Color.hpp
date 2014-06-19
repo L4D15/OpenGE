@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SDL2/SDL.h>
+#include <luabind/scope.hpp>
 
 class Color{
 public:
@@ -27,7 +28,9 @@ public:
     SDL_Color                   ToSDLColor();
     Uint32                      ToPixelValue(SDL_PixelFormat* format);
 
-    const std::string           ToString();
+    std::string                 ToString();
+
+    static luabind::scope       RegisterForScripting();
 
 private:
     SDL_Color                   color;

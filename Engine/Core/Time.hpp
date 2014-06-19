@@ -2,6 +2,7 @@
 #define OPENGE_TIME_H
 
 #include "Engine/Libraries/Libraries.hpp"
+#include <luabind/scope.hpp>
 
 class Time
 {
@@ -12,7 +13,10 @@ public:
 	void					Update();
 	int						GetFPS();
 	void					WaitForNextFrame();
-    inline const Uint32     GetTime() const { return SDL_GetTicks(); }
+    static int              GetTime() { return SDL_GetTicks(); }
+    static float            GetDeltaTime() { return deltaTime; }
+
+    static luabind::scope   RegisterForScripting();
 
 public:
 	static float			deltaTime;

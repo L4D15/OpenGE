@@ -4,8 +4,6 @@
 #include <string>
 #include "Engine/Libraries/Libraries.hpp"
 
-enum class AssetType { Sprite, Audio, Text, Texture, Script, None};
-
 class ResourceManager;
 
 class Asset
@@ -17,6 +15,17 @@ protected:
 	inline Uint16				GetUsage () const { return usage; }
 	inline void					NotifyUse() { ++usage; }
 	inline void					NotifyRelease() { if (usage > 0) --usage; }
+
+public:
+
+    static luabind::scope       RegisterForScripting()
+    {
+        return
+                luabind::class_<Asset>("Asset")
+                    .def_readwrite("name", &Asset::name)
+                    .def_readwrite("filePath", &Asset::filePath)
+                ;
+    }
 
 public:
 	virtual std::string			ToString() const = 0;

@@ -1,6 +1,18 @@
 #include "Engine/Core/Scripting.hpp"
 #include "Engine/Core/Game.hpp"
 #include "Engine/Core/Color.hpp"
+#include "Engine/Core/Math/Vector3.hpp"
+#include "Engine/Core/Math/Math.hpp"
+#include "Engine/Core/Math/Quaternion.hpp"
+#include "Engine/Core/EventManager.hpp"
+#include "Engine/Components/Transform.hpp"
+#include "Engine/Components/Physics.hpp"
+#include "Engine/Components/SpriteRenderer.hpp"
+#include "Engine/Components/Script.hpp"
+#include "Engine/Assets/Asset.hpp"
+#include "Engine/Assets/RenderizableAsset.hpp"
+#include "Engine/Assets/Sprite.hpp"
+#include <luabind/operator.hpp>
 
 
 Scripting::Scripting()
@@ -16,6 +28,8 @@ Scripting::Scripting()
 	{
 		Game::Log("Failed");
 	}
+
+    luaL_openlibs(state);
 
 	luabind::open(state);
 }
@@ -47,10 +61,47 @@ void Scripting::CreateEnvironment()
 {
 	using namespace luabind;
 
-	module(state)
+    Game::Log("Creating lua environment...", false);
+
+    module(state)
 	[
-		class_<Color>("Color")
-			.def(constructor<int, int, int, int>())
-			.def("ToString", &Color::ToString)
+        Vector3::RegisterForScripting(),
+        Quaternion::RegisterForScripting(),
+        Math::RegisterForScripting(),
+        Color::RegisterForScripting(),
+        Time::RegisterForScripting(),
+        Scene::RegisterForScripting(),
+        GameObject::RegisterForScripting(),
+        Components::Transform::RegisterForScripting(),
+        Components::Physics::RegisterForScripting(),
+        Components::SpriteRenderer::RegisterForScripting(),
+        Asset::RegisterForScripting(),
+        RenderizableAsset::RegisterForScripting(),
+        Sprite::RegisterForScripting(),
+        ResourceManager::RegisterForScripting(),
+        Game::RegisterForScripting()
 	];
+	
+	Game::Log("Ok");
+}
+
+void Scripting::CallUpdateFunction(const std::string className, const std::string scriptPath)
+{
+	int error;
+    
+    error = luaL_dofile(state, scriptPath.c_str());
+
+    if (error != 0)
+    {
+    	Game::Log(lua_tostring(state, -1));
+    }
+    else
+    {
+	    luabind::object* states = new luabind::object;
+	    *states = luabind::globals(state);
+
+	    (*states)[className.c_str()]["Update"]();
+
+	    delete states;
+    }
 }

@@ -47,3 +47,32 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
         }
 	}
 }
+
+void GameObject::AddComponent(const string name)
+{
+    if (name == "Transform")
+    {
+        AddComponent<Transform>();
+    }
+    else if (name == "SpriteRenderer")
+    {
+        AddComponent<SpriteRenderer>();
+    }
+    else if (name == "Physics")
+    {
+        AddComponent<Components::Physics>();
+    }
+}
+
+
+using namespace luabind;
+
+scope GameObject::RegisterForScripting()
+{
+    return
+            class_<GameObject>("GameObject")
+                .property("name", &GameObject::GetName, &GameObject::SetName)
+                .def("AddComponent", (void (GameObject::*) (std::string)) &GameObject::AddComponent)
+                .def("GetComponent_Transform", &GameObject::GetTransform)
+            ;
+}
