@@ -17,6 +17,7 @@ public:
 
     void                        Render(const Vector3& pos, const Quaternion& rot, const Vector3& scale) const;
     void                        Update();
+    void                        ChangeAnimation(const std::string name);
 
     static luabind::scope       RegisterForScripting()
     {
@@ -24,6 +25,7 @@ public:
                 luabind::class_<SpriteRenderer>("SpriteRenderer")
                     .def(luabind::constructor<>())
                     .def(luabind::constructor<const std::string>())
+                    .def("ChangeAnimation", &SpriteRenderer::ChangeAnimation)
                 ;
     }
 
