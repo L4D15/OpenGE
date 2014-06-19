@@ -75,17 +75,3 @@ void Time::WaitForNextFrame()
 		SDL_Delay(timeToWait);
 	}
 }
-
-using namespace luabind;
-
-scope Time::RegisterForScripting()
-{
-    return
-            class_<Time>("Time")
-                .scope
-                [
-                    def("GetDeltaTime", &Time::GetDeltaTime),
-                    def("GetTime", &Time::GetTime)
-                ]
-            ;
-}

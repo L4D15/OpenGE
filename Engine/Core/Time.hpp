@@ -16,7 +16,17 @@ public:
     static int              GetTime() { return SDL_GetTicks(); }
     static float            GetDeltaTime() { return deltaTime; }
 
-    static luabind::scope   RegisterForScripting();
+    static luabind::scope   RegisterForScripting()
+    {
+    return
+            luabind::class_<Time>("Time")
+                .scope
+                [
+                    luabind::def("GetDeltaTime", &Time::GetDeltaTime),
+                    luabind::def("GetTime", &Time::GetTime)
+                ]
+            ;
+	}
 
 public:
 	static float			deltaTime;

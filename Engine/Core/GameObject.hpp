@@ -39,8 +39,10 @@ public:
     const std::string       GetName() const { return name; }
     void                    SetName(std::string name) { this->name = name; }
 
-protected:
+public:
     std::string             name;
+
+protected:
     anax::Entity            entity;
 
 	friend class Scene;

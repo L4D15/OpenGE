@@ -81,45 +81,123 @@ void Game::InitializeLibraries()
 
 void Game::InitializeWindow()
 {
+	Game::Log("Initializing Window:");
 	window = new Window();
 	window->title = "Default Game Window";
 	window->Show(1366, 720, false);
+	if (window != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeTime()
 {
+	Game::Log("Initializing Time...", false);
 	time = new Time();
 	time->Update();
+	if (time != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeSettings()
 {
+	Game::Log("Initializing Settings...", false);
 	settings = new Settings();
+	if (settings != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeEventManagement()
 {
+	Game::Log("Initializing Event Manager...", false);
 	eventManager = new EventManager();
-	input = new Input();
+	if (eventManager != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeSceneManager()
 {
+	Game::Log("Initializing Scene Manager...", false);
 	sceneManager = new SceneManager();
 	sceneManager->CreateScene("DefaultScene");
 	sceneManager->ChangeScene("DefaultScene");
+	if (sceneManager != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeResourceManager()
 {
+	Game::Log("Initializing Resource Manager...", false);
 	resourceManager = new ResourceManager();
     resourceManager->GetAsset<Sprite>("Assets/Sprites/Missing_Image.png");
+    if (resourceManager != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::InitializeScripting()
 {
+	Game::Log("Initializing Scripting:");
 	scripting = new Scripting();
 	scripting->CreateEnvironment();
+	if (scripting != NULL)
+	{
+		Game::Log("Ok");
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
+}
+
+void Game::InitializeInput()
+{
+	Game::Log("Initializing Input...", false);
+	input = new Input();
+	if (input != NULL)
+	{
+		Game::Log("Ok");
+
+		Game::Log(input->ToString());
+	}
+	else
+	{
+		Game::Log("Fail");
+	}
 }
 
 void Game::Initialize()
@@ -131,6 +209,7 @@ void Game::Start()
 {
 	InitializeLibraries();
     InitializeScripting();
+	InitializeInput();
 	InitializeSettings();
 	InitializeWindow();
 	InitializeTime();
@@ -164,6 +243,9 @@ void Game::HandleEvents()
 void Game::Update()
 {
 	time->Update();
+	// Update lua reference to global variables
+	scripting->SetGlobal<Input&>("input", *input);
+	scripting->SetGlobal<Time&>("time", *time);
 	sceneManager->OnLoop();
 }
 
@@ -202,10 +284,10 @@ luabind::scope Game::RegisterForScripting()
             .scope
             [
                 def("Log", &Game::Log),
-                def("Time", &Game::GetTime),
-                def("Input", &Game::GetInput),
-                def("Settings", &Game::GetSettings),
-                def("SceneManager", &Game::GetSceneManager),
-                def("ResourceManager", &Game::GetResourceManager)
+                def("GetTime", &Game::GetTime),
+                def("GetInput", &Game::GetInput),
+                def("GetSettings", &Game::GetSettings),
+                def("GetSceneManager", &Game::GetSceneManager),
+                def("GetResourceManager", &Game::GetResourceManager)
             ];
 }

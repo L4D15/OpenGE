@@ -42,6 +42,7 @@ private:
 	void					InitializeResourceManager();
 	void					InitializeSceneManager();
 	void					InitializeScripting();
+	void					InitializeInput();
 
 protected:
 	string					name;

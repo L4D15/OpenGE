@@ -79,7 +79,10 @@ void Scripting::CreateEnvironment()
         RenderizableAsset::RegisterForScripting(),
         Sprite::RegisterForScripting(),
         ResourceManager::RegisterForScripting(),
-        Game::RegisterForScripting()
+        Game::RegisterForScripting(),
+        Input::RegisterForScripting(),
+        Key::RegisterForScripting(),
+        ButtonMapping::RegisterForScripting()
 	];
 	
 	Game::Log("Ok");
@@ -93,7 +96,8 @@ void Scripting::CallUpdateFunction(const std::string className, const std::strin
 
     if (error != 0)
     {
-    	Game::Log(lua_tostring(state, -1));
+    	Game::Log(lua_tostring(state, lua_gettop(state)));
+    	lua_pop(state, 1);
     }
     else
     {
