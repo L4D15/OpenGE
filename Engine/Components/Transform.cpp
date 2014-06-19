@@ -124,4 +124,3 @@ std::string Transform::ToString()
 
 	return ss.str();
 }
-

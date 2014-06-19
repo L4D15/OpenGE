@@ -61,6 +61,13 @@ public:
 	static ResourceManager*	resourceManager;
 	static Input*			input;
 	static Scripting*		scripting;
+
+    // Getters required for luabind (because it can't bind static variables)
+    static Time&            GetTime() { return *time; }
+    static Settings&        GetSettings() { return *settings; }
+    static ResourceManager& GetResourceManager() { return *resourceManager; }
+    static Input&           GetInput() { return *input; }
+    static SceneManager&    GetSceneManager() { return *sceneManager; }
 	
 };
 

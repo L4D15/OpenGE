@@ -3,6 +3,9 @@
 
 #include "Engine/Libraries/Libraries.hpp"
 #include <list>
+#include <luabind/luabind.hpp>
+
+class GameObject;
 
 using namespace anax;
 
@@ -12,12 +15,31 @@ class Script : public Component<Script>
 {
 public:
 	Script();
-	Script(std::string scriptPath);
-	Script(std::list<std::string> scriptsPath);
+    Script(const std::string scriptPath);
+    Script(const std::list<std::string> &scriptsPath);
+    Script(GameObject* owner, const std::string scriptPath);
 	~Script();
 
-protected:
+    void                    Update() const;
+    void                    Start() const;
+    void                    OnCollision() const;
 
+    static luabind::scope   RegisterForScripting()
+    {
+        return
+                luabind::class_<Script>("Script")
+                    .def(luabind::constructor<>())
+                    .def(luabind::constructor<std::string>())
+                ;
+    }
+
+public:
+    GameObject*             owner;
+
+protected:
+    std::list
+    <std::string>           scripts;
+    std::string             className;
 };
 }
 

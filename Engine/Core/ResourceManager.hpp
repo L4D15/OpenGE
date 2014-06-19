@@ -55,6 +55,8 @@ public:
 	    return (* asset);
 	}
 
+    static luabind::scope       RegisterForScripting();
+
 private:
 	std::multimap<
 		std::string,

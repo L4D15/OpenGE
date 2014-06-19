@@ -187,7 +187,7 @@ float Vector3::LengthQuadratic()
  */
 float Vector3::Length()
 {
-    return math::squareRoot(x * x + y * y + z * z);
+    return Math::SquareRoot(x * x + y * y + z * z);
 }
 
 /**
@@ -207,7 +207,7 @@ float Vector3::DistanceQuadratic(const Vector3 &other)
  */
 float Vector3::Distance(const Vector3 &other)
 {
-    return math::squareRoot((x - other.x) + (y - other.y) + (z - other.z));
+    return Math::SquareRoot((x - other.x) + (y - other.y) + (z - other.z));
 }
 
 /**
@@ -226,7 +226,7 @@ Vector3 Vector3::Normalized()
         return normalized;
     }
 
-    float recip = math::inverseSquareRoot(lengthsq);
+    float recip = Math::InverseSquareRoot(lengthsq);
     normalized.x *= recip;
     normalized.y *= recip;
     normalized.z *= recip;
@@ -280,5 +280,8 @@ luabind::scope Vector3::RegisterForScripting()
         .def("Normalized", &Vector3::Normalized)
         .def("ToVector2D", &Vector3::ToVector2D)
         .def("ToString", &Vector3::ToString)
+        .def_readwrite("x", &Vector3::x)
+        .def_readwrite("y", &Vector3::y)
+        .def_readwrite("z", &Vector3::z)
      ;
 }

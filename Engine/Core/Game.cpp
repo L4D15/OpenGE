@@ -130,13 +130,13 @@ void Game::Initialize()
 void Game::Start()
 {
 	InitializeLibraries();
+    InitializeScripting();
 	InitializeSettings();
 	InitializeWindow();
 	InitializeTime();
-	InitializeSceneManager();
-	InitializeEventManagement();
-	InitializeScripting();
+    InitializeEventManagement();
     InitializeResourceManager();
+	InitializeSceneManager();
 
 	Initialize();
 
@@ -201,6 +201,11 @@ luabind::scope Game::RegisterForScripting()
     return class_<Game>("Game")
             .scope
             [
-                def("Log", &Game::Log)
+                def("Log", &Game::Log),
+                def("Time", &Game::GetTime),
+                def("Input", &Game::GetInput),
+                def("Settings", &Game::GetSettings),
+                def("SceneManager", &Game::GetSceneManager),
+                def("ResourceManager", &Game::GetResourceManager)
             ];
 }

@@ -18,6 +18,15 @@ public:
     void                        Render(const Vector3& pos, const Quaternion& rot, const Vector3& scale) const;
     void                        Update();
 
+    static luabind::scope       RegisterForScripting()
+    {
+        return
+                luabind::class_<SpriteRenderer>("SpriteRenderer")
+                    .def(luabind::constructor<>())
+                    .def(luabind::constructor<const std::string>())
+                ;
+    }
+
 protected:
     Sprite&                     sprite;
 

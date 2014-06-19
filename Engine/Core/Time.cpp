@@ -2,6 +2,7 @@
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/Game.hpp"
 #include <sstream>
+#include <luabind/operator.hpp>
 
 using namespace std;
 
@@ -73,4 +74,18 @@ void Time::WaitForNextFrame()
 	{
 		SDL_Delay(timeToWait);
 	}
+}
+
+using namespace luabind;
+
+scope Time::RegisterForScripting()
+{
+    return
+            class_<Time>("Time")
+                .scope
+                [
+                    def("GetDeltaTime", &Time::GetDeltaTime),
+                    def("GetTime", &Time::GetTime)
+                ]
+            ;
 }
