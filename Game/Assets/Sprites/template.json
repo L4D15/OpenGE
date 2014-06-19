@@ -10,7 +10,7 @@
       "oscillate": true
     },
     {
-      "name": "Left",
+      "name": "Right",
       "width": 24,
       "height": 32,
       "frames": 3,
@@ -26,7 +26,7 @@
       "oscillate": true
     },
     {
-      "name": "Right",
+      "name": "Left",
       "width": 24,
       "height": 32,
       "frames": 3,
