@@ -69,8 +69,8 @@ public:
                                        const Quaternion& rot,
                                        const Vector3& scale) const;
 
-    const Animation&            GetAnimation(const std::string name) const;
-    inline const Animation&     GetDefaultAnimation() const { return GetAnimation(defaultAnimation); }
+    Animation*                  GetAnimation(const std::string name);
+    inline const Animation&     GetDefaultAnimation() { return *GetAnimation(defaultAnimation); }
 
     static luabind::scope       RegisterForScripting();
 
