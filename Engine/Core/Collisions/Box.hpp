@@ -10,7 +10,7 @@ public:
 	Box(const float x, const float y, const float width, const float height);
 	virtual ~Box();
 
-	bool					Collides(const Box& other) const;
+	bool					Collides(const Vector3& pos, const Box& other, const Vector3& otherPos) const;
 
 	std::string				ToString();
 
