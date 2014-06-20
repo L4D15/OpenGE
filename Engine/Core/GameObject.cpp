@@ -2,6 +2,7 @@
 #include "Engine/Components/Transform.hpp"
 #include "Engine/Components/SpriteRenderer.hpp"
 #include "Engine/Components/Physics.hpp"
+#include "Engine/Components/BoxCollider.hpp"
 #include "Engine/Core/Game.hpp"
 #include <boost/filesystem.hpp>
 
@@ -45,6 +46,10 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
         {
             AddComponent<Components::Physics>(jsonArray[compIndex].getObject());
         }
+		else if (componentName == "BoxCollider")
+		{
+			AddComponent<Components::BoxCollider>(jsonArray[compIndex].getObject());
+		}
 	}
 }
 

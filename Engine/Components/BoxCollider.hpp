@@ -19,8 +19,10 @@ public:
     BoxCollider(float x, float y, float width, float height)
     : box(x, y, width, height)
     {
-        
+
     }
+
+    BoxCollider(json_spirit::Value jsonString);
 
     virtual ~BoxCollider()
     {
