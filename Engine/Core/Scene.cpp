@@ -55,6 +55,20 @@ Scene::Scene(std::string name, std::string filePath)
 
 			object.AddComponents(components);
 		}
+
+        // Parse Key bidings
+        json_spirit::Array keyBindingArray;
+        keyBindingArray = root.getObject().at("key_bindings").getArray();
+
+        std::string buttonName;
+        std::string keyName;
+        for (unsigned int index = 0; index < keyBindingArray.size(); ++index)
+        {
+            buttonName = keyBindingArray[index].getObject().at("button").getString();
+            keyName = keyBindingArray[index].getObject().at("key").getString();
+
+            Game::input->MapButton(buttonName, keyName);
+        }
 	}
 	else
 	{
@@ -80,7 +94,7 @@ Scene::Scene(const Scene &other)
 
 Scene::~Scene()
 {
-	
+
 }
 
 void Scene::OnActivation()
