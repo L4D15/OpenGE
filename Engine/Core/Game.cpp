@@ -276,6 +276,11 @@ void Game::Log(string text, bool endLine)
 	}
 }
 
+GameObject& Game::Find(anax::Entity& entity)
+{
+	return sceneManager->GetCurrentScene().Find(entity);
+}
+
 using namespace luabind;
 
 luabind::scope Game::RegisterForScripting()

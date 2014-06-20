@@ -6,6 +6,7 @@
 #include "Engine/Systems/SpriteRendering.hpp"
 #include "Engine/Systems/Physics.hpp"
 #include "Engine/Systems/ScriptProcessing.hpp"
+#include "Engine/Systems/Collisions.hpp"
 #include <string>
 #include <map>
 
@@ -30,6 +31,7 @@ public:
 	void						RenameGameObject(std::string name, std::string newName);
 	void						DeleteGameObject(std::string name);
 	GameObject&					Find(std::string name);
+    GameObject&                 Find(anax::Entity& entity) const;
 
 	std::string					ToString();
 
@@ -48,6 +50,7 @@ private:
     SpriteRendering             spriteRendering;
     Physics                     physics;
     ScriptProcessing			scriptProcessing;
+    Collisions                  collisions;
 	
 };
 

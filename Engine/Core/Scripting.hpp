@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Engine/Libraries/Libraries.hpp"
+#include "Engine/Core/GameObject.hpp"
 
 class Scripting
 {
@@ -20,8 +21,8 @@ public:
         luabind::globals(state)[name.c_str()] = value;
     }
 
-    void                CallUpdateFunction(const std::string className, const std::string scriptPath);
-
+    void                CallFunction(const std::string function, const std::string className, const std::string scriptPath) const;
+    void                OnCollision(const std::string className, const std::string scriptPath, GameObject& collided) const;
 
     lua_State*          GetState() const { return state; }
 

@@ -46,15 +46,30 @@ Script::~Script()
 
 void Script::Start() const
 {
-
+    for (auto& script : scripts)
+    {
+        Game::scripting->CallFunction("Start", className, script);
+    }
 }
 
 void Script::Update() const
 {
-    for (auto script : scripts)
+    for (auto& script : scripts)
     {
-        Game::scripting->CallUpdateFunction(className, script);
+        Game::scripting->CallFunction("Update", className, script);
     }
+}
+
+void Script::OnCollision(anax::Entity& collided) const
+{
+    GameObject& collidedObject = Game::Find(collided);
+
+    for (auto& script : scripts)
+    {
+        Game::scripting->SetGlobal("collidedObject", collidedObject);
+        Game::scripting->CallFunction("OnCollision", className, script);
+    }
+
 }
 
 

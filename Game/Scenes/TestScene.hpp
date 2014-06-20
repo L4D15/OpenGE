@@ -6,6 +6,7 @@
 #include "Engine/Components/Transform.hpp"
 #include "Engine/Components/SpriteRenderer.hpp"
 #include "Engine/Components/Script.hpp"
+#include "Engine/Components/BoxCollider.hpp"
 #include "Engine/Assets/Sprite.hpp"
 #include "Engine/Core/Game.hpp"
 
@@ -30,11 +31,12 @@ public:
 
         object.AddComponent<Transform>(12.0f, 16.0f, 1.0f);
         object.AddComponent<SpriteRenderer>("Assets/Sprites/template.png");
-        Script& script = object.AddComponent<Script>(&object, "Assets/Scripts/FixedMovement.lua");
-        
-        object2.AddComponent<Transform>(36.0f, 36.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.0f, 2.0f, 2.0f);
+        object.AddComponent<BoxCollider>(0.0f, 0.0f, 24.0f, 32.0f);
+        Script& script = object.AddComponent<Script>(&object, "Assets/Scripts/Test.lua");
+
+        object2.AddComponent<Transform>(48.0f, 16.0f, 1.0f);
         object2.AddComponent<SpriteRenderer>("Assets/Sprites/template.png");
-        Script& script2 = object2.AddComponent<Script>(&object2, "Assets/Scripts/Test.lua");
+        object2.AddComponent<BoxCollider>(0.0f, 0.0f, 24.0f, 32.0f);
 	}
 
     void Update()
