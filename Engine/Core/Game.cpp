@@ -268,7 +268,7 @@ void Game::Log(string text, bool endLine)
 {
 	if (endLine == true)
 	{
-		printf("%s\n", text.c_str());		
+		printf("%s\n", text.c_str());
 	}
 	else
 	{
