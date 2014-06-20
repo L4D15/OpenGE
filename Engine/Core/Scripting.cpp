@@ -12,6 +12,7 @@
 #include "Engine/Assets/Asset.hpp"
 #include "Engine/Assets/RenderizableAsset.hpp"
 #include "Engine/Assets/Sprite.hpp"
+#include "Engine/Core/Collisions/Box.hpp"
 #include <luabind/operator.hpp>
 
 
@@ -82,30 +83,38 @@ void Scripting::CreateEnvironment()
         Game::RegisterForScripting(),
         Input::RegisterForScripting(),
         Key::RegisterForScripting(),
-        ButtonMapping::RegisterForScripting()
+        ButtonMapping::RegisterForScripting(),
+        Box::RegisterForScripting()
 	];
-	
+    
 	Game::Log("Ok");
 }
 
-void Scripting::CallUpdateFunction(const std::string className, const std::string scriptPath)
+void Scripting::CallFunction(const std::string function, const std::string className, const std::string scriptPath) const
 {
-	int error;
-    
-    error = luaL_dofile(state, scriptPath.c_str());
+	try
+	{
+		int error;
 
-    if (error != 0)
-    {
-    	Game::Log(lua_tostring(state, lua_gettop(state)));
+	    error = luaL_dofile(state, scriptPath.c_str());
+
+	    if (error != 0)
+	    {
+	    	Game::Log(lua_tostring(state, lua_gettop(state)));
+	    	lua_pop(state, 1);
+	    }
+	    else
+	    {
+		    luabind::object* states = new luabind::object;
+		    *states = luabind::globals(state);
+
+		    (*states)[className.c_str()][function.c_str()]();
+
+		    delete states;
+	    }
+	}catch(...)
+	{
+		Game::Log(lua_tostring(state, lua_gettop(state)));
     	lua_pop(state, 1);
-    }
-    else
-    {
-	    luabind::object* states = new luabind::object;
-	    *states = luabind::globals(state);
-
-	    (*states)[className.c_str()]["Update"]();
-
-	    delete states;
-    }
+	}
 }

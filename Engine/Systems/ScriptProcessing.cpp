@@ -24,7 +24,15 @@ void ScriptProcessing::Update() const
 		Components::Script& script = entity.getComponent<Components::Script>();
 
 		// Set the owner of the script as the global 'self' lua variable
-		Game::scripting->SetGlobal<GameObject&>("self", *script.owner);
+		Game::scripting->SetGlobal<GameObject&>("gameObject", *script.owner);
 		script.Update();
 	}
+}
+
+void ScriptProcessing::onEntityAdded(anax::Entity& entity)
+{
+	Components::Script& script = entity.getComponent<Components::Script>();
+
+    Game::scripting->SetGlobal<GameObject&>("gameObject", *script.owner);
+	script.Start();
 }

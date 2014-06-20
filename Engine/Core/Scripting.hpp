@@ -20,8 +20,7 @@ public:
         luabind::globals(state)[name.c_str()] = value;
     }
 
-    void                CallUpdateFunction(const std::string className, const std::string scriptPath);
-
+    void                CallFunction(const std::string function, const std::string className, const std::string scriptPath) const;
 
     lua_State*          GetState() const { return state; }
 

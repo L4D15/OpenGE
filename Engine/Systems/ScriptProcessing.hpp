@@ -12,7 +12,8 @@ public:
 	ScriptProcessing();
 	virtual ~ScriptProcessing();
 
-	void				Update() const;	
+	void				Update() const;
+	void				onEntityAdded(anax::Entity& entity);
 };
 
 }
