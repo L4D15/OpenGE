@@ -26,17 +26,7 @@
                         "x": 0,
                         "y": 0,
                         "z": 0
-                    },
-                    "aceleration":
-                    {
-                        "x": 0,
-                        "y": 0,
-                        "z": 0
-                    },
-                    "mass": 1,
-                    "linear_drag": 1.0,
-                    "angular_drag": 1.0,
-                    "kinematic": false
+                    }
                 },
                 {
                     "name": "BoxCollider",
@@ -63,16 +53,16 @@
             "key": 		"Arrow Right"
         },
         {
-			"button": 	"Walk Left",
-			"key": 		"Arrow Left"
-		},
+            "button": 	"Walk Left",
+            "key": 		"Arrow Left"
+        },
         {
-			"button":	"Walk Up",
-			"key": 		"Arrow Up"
-		},
+            "button":	"Walk Up",
+            "key": 		"Arrow Up"
+        },
         {
-			"button": 	"Walk Down",
-			"key": 		"Arrow Down"
-		}
+            "button": 	"Walk Down",
+            "key": 		"Arrow Down"
+        }
     ]
 }
