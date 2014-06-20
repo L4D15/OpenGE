@@ -46,14 +46,17 @@ Script::~Script()
 
 void Script::Start() const
 {
-
+    for (auto script : scripts)
+    {
+        Game::scripting->CallFunction("Start", className, script);
+    }
 }
 
 void Script::Update() const
 {
     for (auto script : scripts)
     {
-        Game::scripting->CallUpdateFunction(className, script);
+        Game::scripting->CallFunction("Update", className, script);
     }
 }
 
