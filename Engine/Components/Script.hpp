@@ -2,6 +2,7 @@
 #define OPENGE_SCRIPT_H
 
 #include "Engine/Libraries/Libraries.hpp"
+#include <vector>
 #include <list>
 #include <luabind/luabind.hpp>
 
@@ -11,18 +12,21 @@ using namespace anax;
 
 namespace Components
 {
-class Script : public Component<Script>
+class Script : public anax::Component<Script>
 {
 public:
-	Script();
+    Script();
     Script(const std::string scriptPath);
     Script(const std::list<std::string> &scriptsPath);
     Script(GameObject* owner, const std::string scriptPath);
-	~Script();
+    Script(json_spirit::Value jsonString);
+    ~Script();
 
     void                    Update() const;
     void                    Start() const;
     void                    OnCollision(anax::Entity& collided) const;
+
+    std::string				ToString();
 
     static luabind::scope   RegisterForScripting()
     {
@@ -37,9 +41,11 @@ public:
     GameObject*             owner;
 
 protected:
-    std::list
+    std::vector
     <std::string>           scripts;
-    std::string             className;
+
+    std::vector
+    <std::string>           classNames;
 };
 }
 

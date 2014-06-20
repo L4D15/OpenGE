@@ -3,6 +3,7 @@
 #include "Engine/Components/SpriteRenderer.hpp"
 #include "Engine/Components/Physics.hpp"
 #include "Engine/Components/BoxCollider.hpp"
+#include "Engine/Components/Script.hpp"
 #include "Engine/Core/Game.hpp"
 #include <boost/filesystem.hpp>
 
@@ -14,15 +15,15 @@ using namespace Components;
 */
 void GameObject::AddComponents(json_spirit::Array jsonArray)
 {
-	for (unsigned int compIndex = 0; compIndex < jsonArray.size(); ++compIndex)
-	{
-		std::string componentName;
-		componentName = jsonArray[compIndex].getObject().at("name").getString();
+    for (unsigned int compIndex = 0; compIndex < jsonArray.size(); ++compIndex)
+    {
+        std::string componentName;
+        componentName = jsonArray[compIndex].getObject().at("name").getString();
 
-		if (componentName == "Transform")
-		{
-			AddComponent<Transform>(jsonArray[compIndex].getObject());
-		}
+        if (componentName == "Transform")
+        {
+            AddComponent<Transform>(jsonArray[compIndex].getObject());
+        }
         else if (componentName == "SpriteRenderer")
         {
             std::string spritePath;
@@ -46,11 +47,16 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
         {
             AddComponent<Components::Physics>(jsonArray[compIndex].getObject());
         }
-		else if (componentName == "BoxCollider")
-		{
-			AddComponent<Components::BoxCollider>(jsonArray[compIndex].getObject());
-		}
-	}
+        else if (componentName == "BoxCollider")
+        {
+            AddComponent<Components::BoxCollider>(jsonArray[compIndex].getObject());
+        }
+        else if (componentName == "Script")
+        {
+            Script& script = AddComponent<Components::Script>(jsonArray[compIndex].getObject());
+			script.owner = this;
+        }
+    }
 }
 
 void GameObject::AddComponent(const string name)
