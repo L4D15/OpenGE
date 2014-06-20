@@ -13,6 +13,7 @@ Scene::Scene(std::string name)
     world.addSystem(spriteRendering);
     world.addSystem(physics);
     world.addSystem(scriptProcessing);
+    world.addSystem(collisions);
 }
 
 /**
@@ -68,6 +69,7 @@ Scene::Scene(std::string name, std::string filePath)
     world.addSystem(spriteRendering);
     world.addSystem(physics);
     world.addSystem(scriptProcessing);
+    world.addSystem(collisions);
 }
 
 Scene::Scene(const Scene &other)
@@ -96,6 +98,7 @@ void Scene::Update()
     world.refresh();
     physics.Update();
     scriptProcessing.Update();
+    collisions.Update();
 }
 
 void Scene::Render()
@@ -163,6 +166,17 @@ std::string Scene::ToString()
 	ss << " ]" << std::endl;
 
 	return ss.str().c_str();
+}
+
+GameObject& Scene::Find(anax::Entity& entity) const
+{
+    for (auto& object : objectMapper)
+    {
+        if (object.second->entity == entity)
+        {
+            return *object.second;
+        }
+    }
 }
 
 using namespace luabind;

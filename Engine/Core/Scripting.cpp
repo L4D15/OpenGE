@@ -118,3 +118,8 @@ void Scripting::CallFunction(const std::string function, const std::string class
     	lua_pop(state, 1);
 	}
 }
+
+void Scripting::OnCollision(const std::string className, const std::string scriptPath, GameObject& collider) const
+{
+    std::string functionName;
+}

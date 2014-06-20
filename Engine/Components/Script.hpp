@@ -22,7 +22,7 @@ public:
 
     void                    Update() const;
     void                    Start() const;
-    void                    OnCollision() const;
+    void                    OnCollision(anax::Entity& collided) const;
 
     static luabind::scope   RegisterForScripting()
     {

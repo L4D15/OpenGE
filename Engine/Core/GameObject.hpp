@@ -43,8 +43,6 @@ public:
 
 public:
     std::string             name;
-
-protected:
     anax::Entity            entity;
 
 	friend class Scene;

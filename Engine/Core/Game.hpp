@@ -69,6 +69,8 @@ public:
     static ResourceManager& GetResourceManager() { return *resourceManager; }
     static Input&           GetInput() { return *input; }
     static SceneManager&    GetSceneManager() { return *sceneManager; }
+
+    static GameObject&		Find(anax::Entity& entity);
 	
 };
 

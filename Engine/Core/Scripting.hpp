@@ -3,6 +3,7 @@
 
 #include <string>
 #include "Engine/Libraries/Libraries.hpp"
+#include "Engine/Core/GameObject.hpp"
 
 class Scripting
 {
@@ -21,6 +22,7 @@ public:
     }
 
     void                CallFunction(const std::string function, const std::string className, const std::string scriptPath) const;
+    void                OnCollision(const std::string className, const std::string scriptPath, GameObject& collided) const;
 
     lua_State*          GetState() const { return state; }
 

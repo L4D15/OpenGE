@@ -1,7 +1,6 @@
 -- Define class
 local function TestClass(init)
     local self = {
-        name = "Test",
         box,
         transform,
         renderer
@@ -41,6 +40,10 @@ local function TestClass(init)
         end
     end
 
+    function self.onCollision(collided)
+        print(collided.name)
+    end
+
     return self;
 end
 
@@ -56,4 +59,9 @@ end
 -- Update function called every frame
 Test["Update"] = function()
     test.update()
+end
+
+-- Function to be called when a collision takes place
+Test["OnCollision"] = function()
+    test.onCollision(collidedObject)
 end
