@@ -171,6 +171,8 @@ if(APPLE)
 else(APPLE)
 	add_executable(${PROJECT_NAME}  ${ENGINE_CORE_SOURCE_FILES}
                                     ${ENGINE_COMPONENTS_SOURCE_FILES}
+                                    ${ENGINE_SYSTEMS_SOURCE_FILES}
+                                    ${ENGINE_ASSETS_SOURCE_FILES}
                                     ${GAME_SOURCE_FILES})
 endif(APPLE)
 
