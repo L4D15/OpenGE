@@ -144,7 +144,8 @@ if(APPLE)
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Scenes")
 else(APPLE)
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin/Game/Assets")
+	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
 endif(APPLE)
 
 # ============================================================================= #
