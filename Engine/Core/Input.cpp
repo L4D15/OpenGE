@@ -7,6 +7,7 @@ Input::Input()
     keyList.push_back(new Key("Arrow Down", SDLK_DOWN));
     keyList.push_back(new Key("Arrow Right", SDLK_RIGHT));
     keyList.push_back(new Key("Arrow Left", SDLK_LEFT));
+    keyList.push_back(new Key("Space", SDLK_SPACE));
     // TODO: Add more keys
 }
 
@@ -18,7 +19,7 @@ Input::Input(const Input& other)
 
 Input::~Input()
 {
-	
+
 }
 
 void Input::MapButton(const std::string button, const std::string keyName)
