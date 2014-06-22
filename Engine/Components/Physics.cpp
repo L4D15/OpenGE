@@ -3,6 +3,12 @@
 using namespace Components;
 
 Physics::Physics()
+:   velocity(),
+    aceleration(),
+    mass(1.0f),
+    linearDrag(0.0f),
+    angularDrag(0.0f),
+    isKinematic(false)
 {
 
 }
