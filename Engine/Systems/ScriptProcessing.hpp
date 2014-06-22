@@ -2,6 +2,7 @@
 #define OPENGE_SYSTEMS_SCRIPTPROCESSING_H
 
 #include "Engine/Libraries/Libraries.hpp"
+#include "Engine/Components/Script.hpp"
 
 namespace Systems
 {
@@ -14,6 +15,9 @@ public:
 
 	void				Update() const;
 	void				onEntityAdded(anax::Entity& entity);
+
+protected:
+	bool				SetContext(Components::Script& script) const;
 };
 
 }
