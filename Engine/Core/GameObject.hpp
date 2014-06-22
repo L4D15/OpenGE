@@ -3,6 +3,7 @@
 
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Components/Transform.hpp"
+#include "Engine/Components/Physics.hpp"
 #include "Engine/Components/SpriteRenderer.hpp"
 #include <string>
 #include <type_traits>
@@ -14,7 +15,7 @@ protected:
 
 public:
     virtual ~GameObject() {}
-	
+
     template <typename T, typename... Args>
     T&                      AddComponent(Args&&... args) { return entity.addComponent<T>(new T{std::forward<Args>(args)...}); }
 
@@ -32,15 +33,26 @@ public:
 
     Components::Transform&  GetTransform() { return GetComponent<Components::Transform>(); }
     Components::SpriteRenderer& GetSpriteRenderer() { return GetComponent<Components::SpriteRenderer>(); }
+	Components::Physics&	GetPhysics() { return GetComponent<Components::Physics>(); }
 
     inline void             Activate() { entity.activate(); }
     inline void             Deactivate() { entity.deactivate(); }
 
-    static luabind::scope   RegisterForScripting();
 
     const std::string       GetName() const { return name; }
     void                    SetName(std::string name) { this->name = name; }
 
+    static luabind::scope   RegisterForScripting()
+	{
+		return
+				luabind::class_<GameObject>("GameObject")
+					.property("name", &GameObject::GetName, &GameObject::SetName)
+					.def("AddComponent", (void (GameObject::*) (std::string)) &GameObject::AddComponent)
+					.def("GetComponent_Transform", &GameObject::GetTransform)
+					.def("GetComponent_SpriteRenderer", &GameObject::GetSpriteRenderer)
+					.def("GetComponent_Physics", &GameObject::GetPhysics)
+				;
+	}
 public:
     std::string             name;
     anax::Entity            entity;
