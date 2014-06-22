@@ -25,6 +25,7 @@ public:
     void                    Update() const;
     void                    Start() const;
     void                    OnCollision(anax::Entity& collided) const;
+    void                    SetOwner(GameObject* object) { owner = object; }
 
     std::string				ToString();
 

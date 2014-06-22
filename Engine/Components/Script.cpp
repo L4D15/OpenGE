@@ -7,11 +7,13 @@
 using namespace Components;
 
 Script::Script()
+: owner(NULL)
 {
 
 }
 
 Script::Script(const std::string scriptPath)
+: owner(NULL)
 {
     scripts.push_back(Game::resourceManager->GetPath(scriptPath));
     int ini = scriptPath.find_last_of('/') + 1;
@@ -46,6 +48,7 @@ Script::Script(GameObject* owner, const std::string scriptPath)
 }
 
 Script::Script(json_spirit::Value jsonString)
+: owner(NULL)
 {
     /*
         JSON TEMPLATE FOR SCRIPT COMPONENT

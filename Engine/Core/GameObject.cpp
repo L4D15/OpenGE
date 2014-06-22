@@ -54,7 +54,7 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
         else if (componentName == "Script")
         {
             Script& script = AddComponent<Components::Script>(jsonArray[compIndex].getObject());
-			script.owner = this;
+            script.owner = this;
         }
     }
 }
@@ -73,18 +73,4 @@ void GameObject::AddComponent(const string name)
     {
         AddComponent<Components::Physics>();
     }
-}
-
-
-using namespace luabind;
-
-scope GameObject::RegisterForScripting()
-{
-    return
-            class_<GameObject>("GameObject")
-                .property("name", &GameObject::GetName, &GameObject::SetName)
-                .def("AddComponent", (void (GameObject::*) (std::string)) &GameObject::AddComponent)
-                .def("GetComponent_Transform", &GameObject::GetTransform)
-                .def("GetComponent_SpriteRenderer", &GameObject::GetSpriteRenderer)
-            ;
 }
