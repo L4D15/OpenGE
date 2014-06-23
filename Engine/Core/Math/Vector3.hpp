@@ -2,6 +2,7 @@
 #define OPENGE_VECTOR3D_H
 
 #include <string>
+#include <luabind/luabind.hpp>
 
 class Vector2;
 
@@ -33,6 +34,9 @@ public:
     Vector2             ToVector2D();
 
     std::string         ToString();
+
+    static
+    luabind::scope      RegisterForScripting();
 
 public:
     float               x;

@@ -1,0 +1,14 @@
+{
+    "animations":
+    [
+        {
+            "name": "Normal",
+            "width": 32,
+            "height": 32,
+            "frames": 6,
+            "frame-rate": 6.0,
+            "oscillate": false
+        }
+    ],
+    "default_animation": "Normal"
+}

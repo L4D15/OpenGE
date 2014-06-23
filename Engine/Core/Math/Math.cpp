@@ -4,13 +4,26 @@
 #include "Engine/Core/Color.hpp"
 #include <cmath>
 #include <iostream>
+#include <luabind/scope.hpp>
+
+double Math::PI = atan(1) * 4;
+
+Math::Math()
+{
+
+}
+
+Math::~Math()
+{
+
+}
 
 /**
  Inverse Square root.
  * @param number    Number to calculate the inverse square root.
  * @return          Inverse square root of the number.
  */
-float math::inverseSquareRoot(float number)
+float Math::InverseSquareRoot(float number)
 {
     long i;
     float x2, y;
@@ -31,7 +44,7 @@ float math::inverseSquareRoot(float number)
  @param x   Number to calculate the square root.
  @return    Square root of the number.
  */
-float math::squareRoot(float x) {
+float Math::SquareRoot(float x) {
     const float xhalf = 0.5f*x;
 
     union // get bits for floating value
@@ -50,7 +63,7 @@ float math::squareRoot(float x) {
  * @param b
  * @return
  */
-int math::max(int a, int b) {
+int Math::Max(int a, int b) {
     if (a > b) {
         return a;
     }
@@ -63,7 +76,7 @@ int math::max(int a, int b) {
  * @param b
  * @return
  */
-int math::min(int a, int b) {
+int Math::Min(int a, int b) {
     if (a < b) {
         return a;
     }
@@ -76,7 +89,7 @@ int math::min(int a, int b) {
  * @param b
  * @return
  */
-float math::max(float a, float b)
+float Math::Max(float a, float b)
 {
     if (a > b) {
         return a;
@@ -90,7 +103,7 @@ float math::max(float a, float b)
  * @param b
  * @return
  */
-float math::min(float a, float b)
+float Math::Min(float a, float b)
 {
     if (a < b) {
         return a;
@@ -105,7 +118,7 @@ float math::min(float a, float b)
  * @param current
  * @return
  */
-float math::normalize(float start, float end, float current)
+float Math::Normalize(float start, float end, float current)
 {
     return (current - start) / (end - start);
 }
@@ -121,7 +134,7 @@ float math::normalize(float start, float end, float current)
  * @param current   Normalized time (commonly currentTime/finalTime)
  * @return
  */
-float math::interpolate(interpolation::Type type, float start, float end, float time)
+float Math::Interpolate(InterpolationType type, float start, float end, float time)
 {
     if (time > 1.0f)
     {
@@ -134,24 +147,24 @@ float math::interpolate(interpolation::Type type, float start, float end, float 
     }
 
     switch (type) {
-    case interpolation::Linear:
-        return (start + (end - start) * interpolation::linearFunction(time));
+    case Linear:
+        return (start + (end - start) * LinearFunction(time));
         break;
 
-    case interpolation::EasyIn:
-        return (start + (end - start) * interpolation::easyInFunction(time));
+    case EasyIn:
+        return (start + (end - start) * EasyInFunction(time));
         break;
 
-    case interpolation::EasyOut:
-        return (start + (end - start) * interpolation::easyOutFunction(time));
+    case EasyOut:
+        return (start + (end - start) * EasyOutFunction(time));
         break;
 
-    case interpolation::EasyInEasyOut:
-        return (start + (end - start) * interpolation::easyInEasyOutFunction(time));
+    case EasyInEasyOut:
+        return (start + (end - start) * EasyInEasyOutFunction(time));
         break;
 
-    case interpolation::Boomerang:
-        return (start + (end - start) * interpolation::boomerangFunction(time));
+    case Boomerang:
+        return (start + (end - start) * BoomerangFunction(time));
         break;
 
     default:
@@ -160,29 +173,29 @@ float math::interpolate(interpolation::Type type, float start, float end, float 
     }
 }
 
-float math::interpolation::linearFunction(float x)
+float Math::LinearFunction(float x)
 {
     return x;
 }
 
-float math::interpolation::easyInFunction(float x)
+float Math::EasyInFunction(float x)
 {
     return x * x;
 }
 
-float math::interpolation::easyOutFunction(float x)
+float Math::EasyOutFunction(float x)
 {
-    return sin(x * math::PI / 2.0f);
+    return sin(x * Math::PI / 2.0f);
 }
 
-float math::interpolation::easyInEasyOutFunction(float x)
+float Math::EasyInEasyOutFunction(float x)
 {
     return (x * x) / ((x *x) + ((1-x) * (1-x)));
 }
 
-float math::interpolation::boomerangFunction(float x)
+float Math::BoomerangFunction(float x)
 {
-    return (sin(x * math::PI));
+    return (sin(x * Math::PI));
 }
 
 /**
@@ -193,13 +206,13 @@ float math::interpolation::boomerangFunction(float x)
  * @param time
  * @return
  */
-Vector2 math::interpolate(interpolation::Type type, Vector2 start, Vector2 end, float time)
+Vector2 Math::Interpolate(InterpolationType type, Vector2 start, Vector2 end, float time)
 {
     float x;
     float y;
 
-    x = interpolate(type, start.x, end.x, time);
-    y = interpolate(type, start.y, end.y, time);
+    x = Interpolate(type, start.x, end.x, time);
+    y = Interpolate(type, start.y, end.y, time);
 
     return Vector2(x, y);
 }
@@ -212,17 +225,31 @@ Vector2 math::interpolate(interpolation::Type type, Vector2 start, Vector2 end, 
  * @param time
  * @return
  */
-Color math::interpolate(interpolation::Type type, Color start, Color end, float time)
+Color Math::Interpolate(InterpolationType type, Color start, Color end, float time)
 {
     float red;
     float green;
     float blue;
     float alpha;
 
-    red = interpolate(type, start.GetRed(), end.GetRed(), time);
-    green = interpolate(type, start.GetGreen(), end.GetGreen(), time);
-    blue = interpolate(type, start.GetBlue(), end.GetBlue(), time);
-    alpha = interpolate(type, start.GetAlpha(), end.GetAlpha(), time);
+    red = Interpolate(type, start.GetRed(), end.GetRed(), time);
+    green = Interpolate(type, start.GetGreen(), end.GetGreen(), time);
+    blue = Interpolate(type, start.GetBlue(), end.GetBlue(), time);
+    alpha = Interpolate(type, start.GetAlpha(), end.GetAlpha(), time);
 
     return Color(red, green, blue, alpha);
+}
+
+using namespace luabind;
+
+luabind::scope Math::RegisterForScripting()
+{
+    return
+            class_<Math>("Math")
+                .scope
+                [
+                    def("SquareRoot", &Math::SquareRoot),
+                    def("InverseSquareRoot", &Math::InverseSquareRoot),
+                    def("Normalize", &Math::Normalize)
+                ];
 }

@@ -2,6 +2,7 @@
 #include "Engine/Libraries/Libraries.hpp"
 #include "Engine/Core/Game.hpp"
 #include <sstream>
+#include <luabind/operator.hpp>
 
 using namespace std;
 
@@ -63,8 +64,14 @@ void Time::WaitForNextFrame()
 	endTime = SDL_GetTicks();
 
 	float timeToWait;
+	float timeElapsed;
 
-	timeToWait = (1000.0f / Game::settings->maxFPS) - (endTime - time);
+	timeElapsed = (endTime - time);
 
-	SDL_Delay(timeToWait);
+	timeToWait = (1000.0f / Game::settings->maxFPS) - timeElapsed;
+
+	if (timeToWait > 0)
+	{
+		SDL_Delay(timeToWait);
+	}
 }

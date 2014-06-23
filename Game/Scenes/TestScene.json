@@ -1,0 +1,96 @@
+{
+    "name": "TestScene",
+    "objects":
+    [
+        {
+            "name": "background",
+            "components": [
+                {
+                    "name": "Transform",
+                    "position": {
+                        "x": 683,
+                        "y": 360,
+                        "z": 0
+                    },
+                    "scale": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/test_background.png"
+                }
+            ]
+        },
+        {
+
+            "name": "object1",
+            "components":
+            [
+                {
+                    "name": "Transform",
+                    "position":
+                    {
+                        "x": 300.0,
+                        "y": 300.0,
+                        "z": 0.0
+                    },
+                    "scale": {
+                        "x": 2.0,
+                        "y": 2.0,
+                        "z": 2.0
+                    }
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/template.png"
+                },
+                {
+                    "name": "Physics",
+                    "velocity":
+                    {
+                        "x": 0,
+                        "y": 0,
+                        "z": 0
+                    }
+                },
+                {
+                    "name": "BoxCollider",
+                    "dimensions":
+                    {
+                        "width": 128,
+                        "height": 128
+                    }
+                },
+                {
+                    "name": "Script",
+                    "scripts":
+                    [
+                        "Assets/Scripts/Test.lua"
+                    ]
+                }
+            ]
+        }
+    ],
+    "key_bindings":
+    [
+        {
+            "button":	"Walk Right",
+            "key": 		"Arrow Right"
+        },
+        {
+            "button": 	"Walk Left",
+            "key": 		"Arrow Left"
+        },
+        {
+            "button":	"Walk Up",
+            "key": 		"Arrow Up"
+        },
+        {
+            "button": 	"Walk Down",
+            "key": 		"Arrow Down"
+        }
+    ]
+}

@@ -2,52 +2,52 @@
 #define OPENGE_MATH_H
 
 #include <cmath>
+#include <luabind/luabind.hpp>
 
 class Vector2;
 class Vector3;
 class Color;
 
-namespace math
+class Math
 {
+public:
+    typedef enum
+    {
+        Linear,
+        EasyIn,
+        EasyOut,
+        EasyInEasyOut,
+        Boomerang
+    }InterpolationType;
 
-static double PI = atan(1) * 4;
+public:
+    Math();
+    virtual ~Math();
 
-float inverseSquareRoot(float number);
-float squareRoot(float x);
-int max(int a, int b);
-int min(int a, int b);
-float max(float a, float b);
-float min(float a, float b);
+static double               PI;
 
-float normalize(float start, float end, float current);
+static float                InverseSquareRoot(float number);
+static float                SquareRoot(float x);
+static int                  Max(int a, int b);
+static int                  Min(int a, int b);
+static float                Max(float a, float b);
+static float                Min(float a, float b);
+static float                Normalize(float start, float end, float current);
 
-// ===========================================================================
-// Interpolation
-// ===========================================================================
-// Interpolation functions
-namespace interpolation
-{
-typedef enum
-{
-    Linear,
-    EasyIn,
-    EasyOut,
-    EasyInEasyOut,
-    Boomerang
-}Type;
+static float                LinearFunction(float x);
+static float                EasyInFunction(float x);
+static float                EasyOutFunction(float x);
+static float                EasyInEasyOutFunction(float x);
+static float                BoomerangFunction(float x);
 
-float linearFunction(float x);
-float easyInFunction(float x);
-float easyOutFunction(float x);
-float easyInEasyOutFunction(float x);
-float boomerangFunction(float x);
 
-}
+static float Interpolate(InterpolationType type, float start, float end, float time);
+static Vector2 Interpolate(InterpolationType type, Vector2 start, Vector2 end, float time);
+static Color Interpolate(InterpolationType type, Color start, Color end, float time);
 
-float interpolate(interpolation::Type type, float start, float end, float time);
-Vector2 interpolate(interpolation::Type type, Vector2 start, Vector2 end, float time);
-Color interpolate(interpolation::Type type, Color start, Color end, float time);
+static luabind::scope RegisterForScripting();
 
-}
+};
+
 
 #endif  // OPENGE_MATH_H

@@ -1,6 +1,9 @@
-[submodule "Engine/Libraries/Artemis-Cpp"]
-	path = Engine/Libraries/Artemis-Cpp
-	url = https://github.com/vinova/Artemis-Cpp.git
 [submodule "Engine/Libraries/json-spirit"]
 	path = Engine/Libraries/json-spirit
 	url = https://github.com/sirikata/json-spirit.git
+[submodule "Engine/Tools/cmake-modules"]
+	path = Engine/Tools/cmake-modules
+	url = https://github.com/rpavlik/cmake-modules.git
+[submodule "Engine/Libraries/anax"]
+	path = Engine/Libraries/anax
+	url = https://github.com/miguelmartin75/anax.git

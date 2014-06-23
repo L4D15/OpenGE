@@ -153,12 +153,12 @@ void EventManager::OnInputFocus()
 
 void EventManager::OnKeyDown(SDL_Keycode key, Uint16 mod)
 {
-    // Pure Virtual
+    Game::input->NotifyKeyPress(key);
 }
 
 void EventManager::OnKeyUp(SDL_Keycode key, Uint16 mod)
 {
-    // Pure virtual
+    Game::input->NotifyKeyRelease(key);
 }
 
 void EventManager::OnMouseFocus()
