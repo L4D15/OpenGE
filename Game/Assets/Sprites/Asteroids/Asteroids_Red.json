@@ -1,0 +1,14 @@
+{
+	"animations":
+	[
+		{
+			"name": "Default",
+			"width": 128,
+			"height": 128,
+			"frames": 1,
+			"frame-rate": 1.0,
+			"oscillate": false
+		}
+	],
+	"default_animation": "Default"
+}

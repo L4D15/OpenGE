@@ -11,6 +11,7 @@
  * It doesn't initialize variables to any value for efficiency.
  */
 Vector3::Vector3()
+: x(0.0f), y(0.0f), z(0.0f)
 {
 
 }

@@ -122,4 +122,3 @@ Scene& SceneManager::GetScene(std::string name)
 {
 	return (*(sceneMapper.find(name)->second));
 }
-

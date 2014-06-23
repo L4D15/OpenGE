@@ -1,0 +1,50 @@
+{
+    "name": "Asteroids",
+    "key_bindings":
+    [
+        {
+            "button": 	"Fire",
+            "key":		"Space"
+        },
+        {
+            "button":	"Move Left",
+            "key":		"Arrow Left"
+        },
+        {
+            "button":	"Move Right",
+            "key":		"Arrow Right"
+        }
+    ],
+    "objects":
+    [
+        {
+            "name": "PlayerShip",
+            "components":
+            [
+                {
+                    "name": "Transform",
+                    "position":
+                    {
+                        "x": 683.0,
+                        "y": 400.0,
+                        "z": 0.0
+                    }
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/Rocket.png"
+                },
+                {
+                    "name": "Script",
+                    "scripts":
+                    [
+                        "Assets/Scripts/RocketController.lua"
+                    ]
+                },
+                {
+                    "name": "Physics"
+                }
+            ]
+        }
+    ]
+}

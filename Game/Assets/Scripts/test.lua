@@ -18,25 +18,25 @@ local function TestClass(init)
             renderer:ChangeAnimation("Right")
             local movement = Vector3(100.0, 0.0, 0.0) * Time.GetDeltaTime()
             transform.position = transform.position + movement
-        
+
         elseif (input:GetButton("Walk Left")) then
-        
+
             renderer:ChangeAnimation("Left")
             local movement = Vector3(-100.0, 0.0, 0.0) * Time.GetDeltaTime()
             transform.position = transform.position + movement
-        
+
         elseif (input:GetButton("Walk Up")) then
-        
+
             renderer:ChangeAnimation("Back")
             local movement = Vector3(0.0, -100.0, 0.0) * Time.GetDeltaTime()
             transform.position = transform.position + movement
-        
+
         elseif (input:GetButton("Walk Down")) then
-        
+
             renderer:ChangeAnimation("Front")
             local movement = Vector3(0.0, 100.0, 0.0) * Time.GetDeltaTime()
             transform.position = transform.position + movement
-        
+
         end
     end
 
@@ -54,6 +54,7 @@ Test = {}
 Test["Start"] = function()
     test = TestClass()
     test.start()
+    print(input:ToString())
 end
 
 -- Update function called every frame

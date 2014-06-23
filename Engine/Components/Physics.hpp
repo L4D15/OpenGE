@@ -30,7 +30,7 @@ public:
         return
                 luabind::class_<Physics>("Physics")
                     .def(luabind::constructor<>())
-                    .def(luabind::constructor<Vector3, Vector3, float, float, float, bool>())
+                    .def(luabind::constructor<Vector3&, Vector3&, float, float, float, bool>())
                     .def("AddForce", (void (Physics::*) (float, float, float)) &Physics::AddForce)
                     .def("AddTorque", (void (Physics::*) (float, float, float)) &Physics::AddTorque)
                     .def_readwrite("velocity", &Physics::velocity)

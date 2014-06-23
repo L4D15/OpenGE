@@ -159,13 +159,22 @@ void Sprite::AddAnimation(const string name, const int x, const int y, const int
 /**
  * @brief [brief description]
  * @details [long description]
- * 
+ *
  * @param name [description]
  * @return [description]
  */
-const Sprite::Animation& Sprite::GetAnimation(const std::string name) const
+Sprite::Animation* Sprite::GetAnimation(const std::string name)
 {
-  return animationsMapper.find(name)->second;
+    std::map<std::string, Animation>::iterator animIt = animationsMapper.find(name);
+
+    if (animIt != animationsMapper.end())
+    {
+        return & animIt->second;
+    }
+    else
+    {
+        return NULL;
+    }
 }
 
 /**

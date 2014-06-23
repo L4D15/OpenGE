@@ -3,6 +3,29 @@
     "objects":
     [
         {
+            "name": "background",
+            "components": [
+                {
+                    "name": "Transform",
+                    "position": {
+                        "x": 683,
+                        "y": 360,
+                        "z": 0
+                    },
+                    "scale": {
+                        "x": 2,
+                        "y": 2,
+                        "z": 2
+                    }
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/test_background.png"
+                }
+            ]
+        },
+        {
+
             "name": "object1",
             "components":
             [
@@ -10,9 +33,14 @@
                     "name": "Transform",
                     "position":
                     {
-                        "x": 12.0,
-                        "y": 16.0,
+                        "x": 300.0,
+                        "y": 300.0,
                         "z": 0.0
+                    },
+                    "scale": {
+                        "x": 2.0,
+                        "y": 2.0,
+                        "z": 2.0
                     }
                 },
                 {

@@ -24,7 +24,7 @@ public:
     {
         std::stringstream ss;
         ss << name << " { push: " << timePressed << " relese: " << timeReleased << "}";
-        return ss.str(); 
+        return ss.str();
     }
 
 	static luabind::scope	RegisterForScripting()
@@ -98,6 +98,7 @@ public:
                     .def("GetButton", &Input::GetButton)
                     .def("GetButtonPressTime", &Input::GetButtonPressTime)
                     .def("GetButtonReleaseTime", &Input::GetButtonReleaseTime)
+                    .def("ToString", &Input::ToString)
                 ;
     }
 
@@ -113,7 +114,7 @@ protected:
     ButtonMapping*          SearchButtonMapping(const std::string button);
 
     friend class EventManager;
-	
+
 };
 
 #endif // OPENGE_INPUT_H

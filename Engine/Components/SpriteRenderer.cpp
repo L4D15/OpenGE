@@ -82,5 +82,17 @@ void SpriteRenderer::Update()
 
 void SpriteRenderer::ChangeAnimation(const std::string name)
 {
-    currentAnimation = & (sprite.GetAnimation(name));
+    Sprite::Animation* anim = sprite.GetAnimation(name);
+
+    if (anim != NULL)
+    {
+        currentAnimation = anim;
+    }
+    else
+    {
+        std::stringstream ss;
+
+        ss << "-- [!] " << sprite.name << " have no animation called " << name;
+        Game::Log(ss.str());
+    }
 }
