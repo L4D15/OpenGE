@@ -20,7 +20,7 @@ void TestGame::Initialize()
 
     sceneManager->CreateScene("TestScene", Game::resourceManager->GetPath("Scenes/TestScene.json"));
 	sceneManager->ChangeScene("TestScene");
-
+    
     Scene& currentScene = sceneManager->GetCurrentScene();
     Game::Log(currentScene.ToString());
 }
