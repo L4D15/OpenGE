@@ -19,6 +19,12 @@ LuaScript::LuaScript(const std::string className, const std::string path)
 
 }
 
+LuaScript::LuaScript(json_spirit::Value jsonString)
+{
+    className = jsonString.getObject().at("class").getString();
+    scriptPath = Game::resourceManager->GetPath(jsonString.getObject().at("path").getString());
+}
+
 LuaScript::~LuaScript()
 {
 

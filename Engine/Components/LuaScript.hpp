@@ -11,6 +11,7 @@ class LuaScript : public anax::Component<LuaScript>
 public:
     LuaScript();
     LuaScript(const std::string className, const std::string path);
+    LuaScript(json_spirit::Value jsonString);
     virtual ~LuaScript();
 
 protected:
