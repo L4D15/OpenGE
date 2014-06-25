@@ -91,9 +91,20 @@ void LuaScripting::onEntityAdded(anax::Entity& entity)
 {
     RegisterObject(entity);
     CreateInstance(entity.getComponent<Components::LuaScript>().GetClass(), entity);
+    RunFunction("Start", entity.getComponent<Components::LuaScript>().GetClass(), entity);
 }
 
 void LuaScripting::onEntityRemoved(anax::Entity& entity)
 {
+    // TODO: Free data from lua. How?!
+}
 
+void LuaScripting::ProcessEntities()
+{
+    auto entities = getEntities();
+
+    for (auto& entity : entities)
+    {
+        RunFunction("Update", entity.getComponent<Components::LuaScript>().GetClass(), entity);
+    }
 }

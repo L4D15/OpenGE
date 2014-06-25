@@ -21,6 +21,8 @@ private:
     void onEntityAdded(anax::Entity& entity);
     void onEntityRemoved(anax::Entity& entity);
 
+    void ProcessEntities();
+
 protected:
     lua_State*			luaState;
 
