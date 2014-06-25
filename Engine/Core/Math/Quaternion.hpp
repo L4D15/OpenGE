@@ -2,8 +2,6 @@
 #define OPENGE_QUATERNION_H
 
 #include "Engine/Core/Math/Vector3.hpp"
-#include <luabind/scope.hpp>
-#include <luabind/operator.hpp>
 
 class Quaternion
 {
@@ -26,26 +24,6 @@ public:
 	Quaternion 				Normalized();
 
 	std::string				ToString();
-
-    static luabind::scope   RegisterForScripting()
-    {
-        return
-                luabind::class_<Quaternion>("Quaternion")
-                    .def(luabind::constructor<>())
-                    .def(luabind::constructor<float, float, float, float>())
-                    .def(luabind::constructor<float, Vector3&>())
-                    .def(luabind::constructor<Quaternion&>())
-                    .def(luabind::self + Quaternion())
-                    .def(luabind::self - Quaternion())
-                    .def(luabind::self * Quaternion())
-                    .def(luabind::self * float())
-                    .def("DotProduct", &Quaternion::DotProduct)
-                    .def("Length", &Quaternion::Length)
-                    .def("LengthQuadratic", &Quaternion::LengthQuadratic)
-                    .def("Normalized", &Quaternion::Normalized)
-                    .def("ToString", &Quaternion::ToString)
-                ;
-    }
 
 public:
 	float w;

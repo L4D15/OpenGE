@@ -19,16 +19,6 @@ public:
     void                        Update();
     void                        ChangeAnimation(const std::string name);
 
-    static luabind::scope       RegisterForScripting()
-    {
-        return
-                luabind::class_<SpriteRenderer>("SpriteRenderer")
-                    .def(luabind::constructor<>())
-                    .def(luabind::constructor<const std::string>())
-                    .def("ChangeAnimation", &SpriteRenderer::ChangeAnimation)
-                ;
-    }
-
 protected:
     Sprite&                     sprite;
 

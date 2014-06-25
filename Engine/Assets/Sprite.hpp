@@ -72,8 +72,6 @@ public:
     Animation*                  GetAnimation(const std::string name);
     inline const Animation&     GetDefaultAnimation() { return *GetAnimation(defaultAnimation); }
 
-    static luabind::scope       RegisterForScripting();
-
 public:
     virtual std::string         ToString() const;
 

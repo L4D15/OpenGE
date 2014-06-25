@@ -9,7 +9,6 @@
 #include "Engine/Core/SceneManager.hpp"
 #include "Engine/Core/ResourceManager.hpp"
 #include "Engine/Core/Input.hpp"
-#include "Engine/Core/Scripting.hpp"
 #include <string>
 #include <luabind/luabind.hpp>
 
@@ -31,7 +30,6 @@ public:
 
 	static void				Terminate();
 	static void				Log(string text, bool endLine = true);
-    static luabind::scope   RegisterForScripting();
 
 private:
 	void					InitializeLibraries();
@@ -61,16 +59,8 @@ public:
 	static SceneManager*	sceneManager;
 	static ResourceManager*	resourceManager;
 	static Input*			input;
-	static Scripting*		scripting;
 
-    // Getters required for luabind (because it can't bind static variables)
-    static Time&            GetTime() { return *time; }
-    static Settings&        GetSettings() { return *settings; }
-    static ResourceManager& GetResourceManager() { return *resourceManager; }
-    static Input&           GetInput() { return *input; }
-    static SceneManager&    GetSceneManager() { return *sceneManager; }
-
-    static GameObject&		Find(anax::Entity& entity);
+    static GameObject&		Find(const anax::Entity& entity);
 	
 };
 

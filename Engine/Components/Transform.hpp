@@ -21,21 +21,6 @@ public:
 
     std::string             ToString();
 
-    static luabind::scope   RegisterForScripting()
-    {
-        return
-                luabind::class_<Transform>("Transform")
-                    .def(luabind::constructor<>())
-                    .def(luabind::constructor<float, float, float>())
-                    .def(luabind::constructor<float, float, float, float, float, float>())
-                    .def(luabind::constructor<float, float, float, float, float, float, float, float, float>())
-                    .def_readwrite("position", &Transform::position)
-                    .def_readwrite("rotation", &Transform::rotation)
-                    .def_readwrite("scale", &Transform::scale)
-                    .def("ToString", &Transform::ToString)
-                ;
-    }
-
 public:
     Vector3                 position;
     Quaternion              rotation;

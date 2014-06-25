@@ -30,8 +30,6 @@ public:
 
     std::string                 ToString();
 
-    static luabind::scope       RegisterForScripting();
-
 private:
     SDL_Color                   color;
 };

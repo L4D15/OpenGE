@@ -45,8 +45,6 @@ static float Interpolate(InterpolationType type, float start, float end, float t
 static Vector2 Interpolate(InterpolationType type, Vector2 start, Vector2 end, float time);
 static Color Interpolate(InterpolationType type, Color start, Color end, float time);
 
-static luabind::scope RegisterForScripting();
-
 };
 
 

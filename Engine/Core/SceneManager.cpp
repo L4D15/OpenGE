@@ -73,7 +73,6 @@ Scene& SceneManager::ChangeScene(std::string sceneName)
 		}
 
 		currentScene = mappedScene->second;
-        Game::scripting->SetGlobal("scene", *currentScene);
 		currentScene->OnActivation();
 	}
 	else

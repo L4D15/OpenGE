@@ -12,18 +12,6 @@ public:
 
     bool                    Collides(const Vector3& pos, const Circle& other, const Vector3& otherPos);
 
-    static luabind::scope   RegisterForScripting()
-    {
-        return
-            luabind::class_<Circle>("Circle")
-                .def(luabind::constructor<float, float, float>())
-                .def("Collides", &Circle::Collides)
-                .def_readwrite("radius", &Circle::radius)
-                .def_readwrite("offsetX", &Circle::offsetX)
-                .def_readwrite("offsetY", &Circle::offsetY)
-            ;
-    }
-
 public:
     float                   radius;
     float                   offsetX;

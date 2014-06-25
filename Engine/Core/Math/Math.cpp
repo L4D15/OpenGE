@@ -239,17 +239,3 @@ Color Math::Interpolate(InterpolationType type, Color start, Color end, float ti
 
     return Color(red, green, blue, alpha);
 }
-
-using namespace luabind;
-
-luabind::scope Math::RegisterForScripting()
-{
-    return
-            class_<Math>("Math")
-                .scope
-                [
-                    def("SquareRoot", &Math::SquareRoot),
-                    def("InverseSquareRoot", &Math::InverseSquareRoot),
-                    def("Normalize", &Math::Normalize)
-                ];
-}

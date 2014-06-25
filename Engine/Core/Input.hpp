@@ -27,20 +27,6 @@ public:
         return ss.str();
     }
 
-	static luabind::scope	RegisterForScripting()
-	{
-		return
-				luabind::class_<Key>("Key")
-                    .def(luabind::constructor<std::string, SDL_Keycode>())
-					.def("NotifyPressed", &Key::NotifyPressed)
-					.def("NotifyReleased", &Key::NotifyReleased)
-					.def_readwrite("name", &Key::name)
-					.def_readwrite("keycode", &Key::keycode)
-					.def_readonly("timePressed", &Key::timePressed)
-					.def_readonly("timeReleased", &Key::timeReleased)
-                ;
-	}
-
 public:
     std::string             name;
     SDL_Keycode             keycode;

@@ -205,24 +205,3 @@ std::string Color::ToString()
 
     return stream.str();
 }
-
-using namespace luabind;
-
-scope Color::RegisterForScripting()
-{
-    return
-            class_<Color>("Color")
-                .def(constructor<>())
-                .def(constructor<int, int, int, int>())
-                .def(constructor<const char*, Uint8>())
-                .def(constructor<Color&>())
-                .def("Red", &Color::GetRed)
-                .def("Green", &Color::GetGreen)
-                .def("Blue", &Color::GetBlue)
-                .def("Alpha", &Color::GetAlpha)
-                .def("Red", &Color::SetRed)
-                .def("Green", &Color::SetGreen)
-                .def("Blue", &Color::SetBlue)
-                .def("ToString", &Color::ToString)
-            ;
-}

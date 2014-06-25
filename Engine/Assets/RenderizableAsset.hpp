@@ -13,12 +13,6 @@ protected:
 
 public:
 	virtual void			Render (const Vector3& pos, const Quaternion& rot, const Vector3& scale) const = 0;
-    static luabind::scope   RegisterForScripting()
-    {
-        return
-                luabind::class_<RenderizableAsset>("RenderizableAsset")
-                ;
-    }
 };
 
 #endif // OPENGE_RENDERIZABLEASSET_H

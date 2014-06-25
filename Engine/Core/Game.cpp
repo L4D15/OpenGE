@@ -15,7 +15,6 @@ EventManager* 		Game::eventManager 		= NULL;
 SceneManager*		Game::sceneManager 		= NULL;
 ResourceManager* 	Game::resourceManager 	= NULL;
 Input*				Game::input 			= NULL;
-Scripting*			Game::scripting 		= NULL;
 // ---
 
 Game::Game()
@@ -36,7 +35,6 @@ Game::~Game()
 	delete sceneManager;
 	delete resourceManager;
 	delete input;
-	delete scripting;
 	delete window;
 	SDL_Quit();
 	TTF_Quit();
@@ -169,21 +167,6 @@ void Game::InitializeResourceManager()
 	}
 }
 
-void Game::InitializeScripting()
-{
-	Game::Log("Initializing Scripting:");
-	scripting = new Scripting();
-	scripting->CreateEnvironment();
-	if (scripting != NULL)
-	{
-		Game::Log("Ok");
-	}
-	else
-	{
-		Game::Log("Fail");
-	}
-}
-
 void Game::InitializeInput()
 {
 	Game::Log("Initializing Input...", false);
@@ -208,7 +191,6 @@ void Game::Initialize()
 void Game::Start()
 {
 	InitializeLibraries();
-    InitializeScripting();
 	InitializeInput();
 	InitializeSettings();
 	InitializeWindow();
@@ -242,10 +224,7 @@ void Game::HandleEvents()
 
 void Game::Update()
 {
-	time->Update();
-	// Update lua reference to global variables
-	scripting->SetGlobal<Input&>("input", *input);
-	scripting->SetGlobal<Time&>("time", *time);
+    time->Update();
 	sceneManager->OnLoop();
 }
 
@@ -276,23 +255,7 @@ void Game::Log(string text, bool endLine)
 	}
 }
 
-GameObject& Game::Find(anax::Entity& entity)
+GameObject& Game::Find(const anax::Entity& entity)
 {
 	return sceneManager->GetCurrentScene().Find(entity);
-}
-
-using namespace luabind;
-
-luabind::scope Game::RegisterForScripting()
-{
-    return class_<Game>("Game")
-            .scope
-            [
-                def("Log", &Game::Log),
-                def("GetTime", &Game::GetTime),
-                def("GetInput", &Game::GetInput),
-                def("GetSettings", &Game::GetSettings),
-                def("GetSceneManager", &Game::GetSceneManager),
-                def("GetResourceManager", &Game::GetResourceManager)
-            ];
 }

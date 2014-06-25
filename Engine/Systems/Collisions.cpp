@@ -1,7 +1,6 @@
 #include "Engine/Systems/Collisions.hpp"
 #include "Engine/Components/Transform.hpp"
 #include "Engine/Components/BoxCollider.hpp"
-#include "Engine/Components/Script.hpp"
 
 Collisions::Collisions()
 : Base(anax::ComponentFilter().requires<Components::Transform, Components::BoxCollider>())
@@ -16,6 +15,7 @@ Collisions::~Collisions()
 
 void Collisions::Update() const
 {
+    /*
     auto entities = getEntities();
     for (auto& entity : entities)
     {
@@ -23,7 +23,6 @@ void Collisions::Update() const
         {
             Components::Transform& transform = entity.getComponent<Components::Transform>();
             Components::BoxCollider& collider = entity.getComponent<Components::BoxCollider>();
-            Components::Script& script = entity.getComponent<Components::Script>();
 
             for (auto& other : entities)
             {
@@ -37,10 +36,11 @@ void Collisions::Update() const
                     
                     if (collision == true)
                     {
-                        script.OnCollision(other);
+                        // TODO: Call OnCollision()
                     }
                 }
             }
         }
     }
+    */
 }
