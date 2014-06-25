@@ -12,6 +12,10 @@ public:
     LuaScripting();
     virtual ~LuaScripting();
 
+    void CreateEnvironment();
+    void ProcessEntities();
+
+
 private:
     void RegisterClass(const std::string scriptPath);
     void RegisterObject(const anax::Entity& object);
@@ -21,7 +25,9 @@ private:
     void onEntityAdded(anax::Entity& entity);
     void onEntityRemoved(anax::Entity& entity);
 
-    void ProcessEntities();
+    template <class T>
+    void SetGlobal(const std::string name, const T& value);
+
 
 protected:
     lua_State*			luaState;

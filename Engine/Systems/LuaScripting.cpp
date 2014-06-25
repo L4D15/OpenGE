@@ -23,6 +23,9 @@ LuaScripting::LuaScripting()
         luaL_openlibs(luaState);
         luabind::open(luaState);
     }
+
+    // Set some Global variables
+    SetGlobal<Input&>("input", *Game::input);
 }
 
 LuaScripting::~LuaScripting()
@@ -80,6 +83,9 @@ void LuaScripting::RunFunction(const string function, const string className, co
 {
     GameObject& object = Game::Find(owner);
 
+    // Set gameObject reference to the owner of this script
+    SetGlobal<GameObject&>("gameObject", object);
+
     std::stringstream ss;
 
     ss << object.name << "['" << className << "']." << function << "()";
@@ -99,6 +105,12 @@ void LuaScripting::onEntityRemoved(anax::Entity& entity)
     // TODO: Free data from lua. How?!
 }
 
+template <class T>
+void LuaScripting::SetGlobal(const std::string name, const T& value)
+{
+    luabind::globals(luaState)[name.c_str()] = value;
+}
+
 void LuaScripting::ProcessEntities()
 {
     auto entities = getEntities();
@@ -107,4 +119,9 @@ void LuaScripting::ProcessEntities()
     {
         RunFunction("Update", entity.getComponent<Components::LuaScript>().GetClass(), entity);
     }
+}
+
+void LuaScripting::CreateEnvironment()
+{
+    
 }

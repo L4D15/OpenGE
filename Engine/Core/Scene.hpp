@@ -6,6 +6,7 @@
 #include "Engine/Systems/SpriteRendering.hpp"
 #include "Engine/Systems/Physics.hpp"
 #include "Engine/Systems/Collisions.hpp"
+#include "Engine/Systems/LuaScripting.hpp"
 #include <string>
 #include <map>
 
@@ -47,7 +48,8 @@ private:
     SpriteRendering             spriteRendering;
     Physics                     physics;
     Collisions                  collisions;
-	
+	LuaScripting				luaScripting;
+
 };
 
 #endif // OPENGE_SCENE_H

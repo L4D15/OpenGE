@@ -13,6 +13,9 @@ Scene::Scene(std::string name)
     world.addSystem(spriteRendering);
     world.addSystem(physics);
     world.addSystem(collisions);
+    world.addSystem(luaScripting);
+
+    luaScripting.CreateEnvironment();
 }
 
 /**
@@ -82,6 +85,9 @@ Scene::Scene(std::string name, std::string filePath)
     world.addSystem(spriteRendering);
     world.addSystem(physics);
     world.addSystem(collisions);
+    world.addSystem(luaScripting);
+
+    luaScripting.CreateEnvironment();
 }
 
 Scene::Scene(const Scene &other)
@@ -110,6 +116,7 @@ void Scene::Update()
     world.refresh();
     physics.Update();
     collisions.Update();
+    luaScripting.ProcessEntities();
 }
 
 void Scene::Render()

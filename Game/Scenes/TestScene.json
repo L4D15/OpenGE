@@ -66,10 +66,8 @@
                 },
                 {
                     "name": "Script",
-                    "scripts":
-                    [
-                        "Assets/Scripts/Test.lua"
-                    ]
+                    "class": "PlayerController",
+                    "path": "Assets/Scripts/PlayerController.lua"
                 }
             ]
         }
