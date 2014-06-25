@@ -14,9 +14,12 @@ public:
     LuaScript(json_spirit::Value jsonString);
     virtual ~LuaScript();
 
+    inline std::string             GetClass() const { return className; }
+    inline std::string             GetPath() const { return scriptPath; }
+
 protected:
-    std::string className;
-    std::string scriptPath;
+    std::string                     className;
+    std::string                     scriptPath;
 };
 
 }

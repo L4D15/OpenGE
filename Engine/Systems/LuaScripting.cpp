@@ -1,4 +1,5 @@
 #include "Engine/Systems/LuaScripting.hpp"
+#include "Engine/Components/LuaScript.hpp"
 #include "Engine/Core/Game.hpp"
 #include <sstream>
 
@@ -88,10 +89,11 @@ void LuaScripting::RunFunction(const string function, const string className, co
 
 void LuaScripting::onEntityAdded(anax::Entity& entity)
 {
-
+    RegisterObject(entity);
+    CreateInstance(entity.getComponent<Components::LuaScript>().GetClass(), entity);
 }
 
 void LuaScripting::onEntityRemoved(anax::Entity& entity)
 {
-    
+
 }
