@@ -72,6 +72,9 @@ public:
     Animation*                  GetAnimation(const std::string name);
     inline const Animation&     GetDefaultAnimation() { return *GetAnimation(defaultAnimation); }
 
+    inline Uint32                GetWidth() const { return width; }
+    inline Uint32                GetHeight() const { return height; }
+
 public:
     virtual std::string         ToString() const;
 

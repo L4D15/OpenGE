@@ -65,7 +65,7 @@
                     }
                 },
                 {
-                    "name": "Script",
+                    "name": "LuaScript",
                     "class": "PlayerController",
                     "path": "Assets/Scripts/PlayerController.lua"
                 }

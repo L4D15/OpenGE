@@ -140,8 +140,6 @@ void Game::InitializeSceneManager()
 {
 	Game::Log("Initializing Scene Manager...", false);
 	sceneManager = new SceneManager();
-	sceneManager->CreateScene("DefaultScene");
-	sceneManager->ChangeScene("DefaultScene");
 	if (sceneManager != NULL)
 	{
 		Game::Log("Ok");
