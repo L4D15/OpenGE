@@ -38,6 +38,8 @@ Scene& SceneManager::CreateScene(std::string name, std::string filePath)
 {
 	Scene* scene;
 
+    Game::Log("-- [?] SceneManager - Creating Scene ", false);
+    Game::Log(filePath);
 	scene = new Scene(name, filePath);
 
 	std::pair<std::string, Scene* > mappedScene(name, scene);
@@ -73,7 +75,6 @@ Scene& SceneManager::ChangeScene(std::string sceneName)
 		}
 
 		currentScene = mappedScene->second;
-        Game::scripting->SetGlobal("scene", *currentScene);
 		currentScene->OnActivation();
 	}
 	else

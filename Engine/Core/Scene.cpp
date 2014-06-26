@@ -12,8 +12,10 @@ Scene::Scene(std::string name)
 {
     world.addSystem(spriteRendering);
     world.addSystem(physics);
-    world.addSystem(scriptProcessing);
     world.addSystem(collisions);
+    world.addSystem(luaScripting);
+
+    luaScripting.CreateEnvironment();
 }
 
 /**
@@ -57,17 +59,20 @@ Scene::Scene(std::string name, std::string filePath)
 		}
 
         // Parse Key bidings
-        json_spirit::Array keyBindingArray;
-        keyBindingArray = root.getObject().at("key_bindings").getArray();
-
-        std::string buttonName;
-        std::string keyName;
-        for (unsigned int index = 0; index < keyBindingArray.size(); ++index)
+        if (root.contains("key_bindings"))
         {
-            buttonName = keyBindingArray[index].getObject().at("button").getString();
-            keyName = keyBindingArray[index].getObject().at("key").getString();
+            json_spirit::Array keyBindingArray;
+            keyBindingArray = root.getObject().at("key_bindings").getArray();
 
-            Game::input->MapButton(buttonName, keyName);
+            std::string buttonName;
+            std::string keyName;
+            for (unsigned int index = 0; index < keyBindingArray.size(); ++index)
+            {
+                buttonName = keyBindingArray[index].getObject().at("button").getString();
+                keyName = keyBindingArray[index].getObject().at("key").getString();
+
+                Game::input->MapButton(buttonName, keyName);
+            }
         }
 	}
 	else
@@ -82,8 +87,10 @@ Scene::Scene(std::string name, std::string filePath)
     // Add systems to world
     world.addSystem(spriteRendering);
     world.addSystem(physics);
-    world.addSystem(scriptProcessing);
     world.addSystem(collisions);
+    world.addSystem(luaScripting);
+
+    luaScripting.CreateEnvironment();
 }
 
 Scene::Scene(const Scene &other)
@@ -111,8 +118,8 @@ void Scene::Update()
 {
     world.refresh();
     physics.Update();
-    scriptProcessing.Update();
     collisions.Update();
+    luaScripting.ProcessEntities();
 }
 
 void Scene::Render()
@@ -182,7 +189,7 @@ std::string Scene::ToString()
 	return ss.str().c_str();
 }
 
-GameObject& Scene::Find(anax::Entity& entity) const
+GameObject& Scene::Find(const anax::Entity& entity) const
 {
     for (auto& object : objectMapper)
     {
@@ -191,14 +198,4 @@ GameObject& Scene::Find(anax::Entity& entity) const
             return *object.second;
         }
     }
-}
-
-using namespace luabind;
-
-scope Scene::RegisterForScripting()
-{
-    return
-            class_<Scene>("Scene")
-                .def("CreateGameObject", &Scene::CreateGameObject)
-            ;
 }

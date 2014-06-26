@@ -42,17 +42,6 @@ public:
     const std::string       GetName() const { return name; }
     void                    SetName(std::string name) { this->name = name; }
 
-    static luabind::scope   RegisterForScripting()
-	{
-		return
-				luabind::class_<GameObject>("GameObject")
-					.property("name", &GameObject::GetName, &GameObject::SetName)
-					.def("AddComponent", (void (GameObject::*) (std::string)) &GameObject::AddComponent)
-					.def("GetComponent_Transform", &GameObject::GetTransform)
-					.def("GetComponent_SpriteRenderer", &GameObject::GetSpriteRenderer)
-					.def("GetComponent_Physics", &GameObject::GetPhysics)
-				;
-	}
 public:
     std::string             name;
     anax::Entity            entity;

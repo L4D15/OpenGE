@@ -189,13 +189,3 @@ std::string Sprite::ToString() const
 
 	return ss.str();
 }
-
-luabind::scope Sprite::RegisterForScripting()
-{
-    return
-            luabind::class_<Sprite>("Sprite")
-                .def_readwrite("width", &Sprite::width)
-                .def_readwrite("height", &Sprite::height)
-                .def("ToString", &Sprite::ToString)
-            ;
-}

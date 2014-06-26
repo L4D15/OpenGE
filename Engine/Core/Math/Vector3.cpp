@@ -256,33 +256,3 @@ std::string Vector3::ToString()
 
     return str.str();
 }
-
-using namespace luabind;
-
-/**
- * @brief Vector3::RegisterForScripting
- */
-luabind::scope Vector3::RegisterForScripting()
-{
-    return
-    class_<Vector3>("Vector3")
-        .def(constructor<float, float, float>())
-        .def(constructor<Vector3>())
-        .def(constructor<>())
-        .def(self + Vector3())
-        .def(self - Vector3())
-        .def(self * Vector3())
-        .def(self * float())
-        .def("DotProduct", &Vector3::DotProduct)
-        .def("LengthQuadratic", &Vector3::LengthQuadratic)
-        .def("Length", &Vector3::Length)
-        .def("DistanceQuadratic", &Vector3::DistanceQuadratic)
-        .def("Distance", &Vector3::Distance)
-        .def("Normalized", &Vector3::Normalized)
-        .def("ToVector2D", &Vector3::ToVector2D)
-        .def("ToString", &Vector3::ToString)
-        .def_readwrite("x", &Vector3::x)
-        .def_readwrite("y", &Vector3::y)
-        .def_readwrite("z", &Vector3::z)
-     ;
-}

@@ -3,7 +3,7 @@
 #include "Engine/Components/SpriteRenderer.hpp"
 #include "Engine/Components/Physics.hpp"
 #include "Engine/Components/BoxCollider.hpp"
-#include "Engine/Components/Script.hpp"
+#include "Engine/Components/LuaScript.hpp"
 #include "Engine/Core/Game.hpp"
 #include <boost/filesystem.hpp>
 
@@ -51,10 +51,9 @@ void GameObject::AddComponents(json_spirit::Array jsonArray)
         {
             AddComponent<Components::BoxCollider>(jsonArray[compIndex].getObject());
         }
-        else if (componentName == "Script")
+        else if (componentName == "LuaScript")
         {
-            Script& script = AddComponent<Components::Script>(jsonArray[compIndex].getObject());
-            script.owner = this;
+            AddComponent<Components::LuaScript>(jsonArray[compIndex].getObject());
         }
     }
 }

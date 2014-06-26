@@ -14,21 +14,6 @@ public:
 
 	std::string				ToString();
 
-
-	static luabind::scope	RegisterForScripting()
-	{
-		return
-			luabind::class_<Box>("Box")
-				.def(luabind::constructor<float, float, float, float>())
-                .def_readwrite("offsetX", &Box::offsetX)
-                .def_readwrite("offsetY", &Box::offsetY)
-                .def_readwrite("width", &Box::width)
-                .def_readwrite("height", &Box::height)
-				.def("Collides", &Box::Collides)
-				.def("ToString", &Box::ToString)
-			;
-	}
-
 public:
 	float					offsetX;
 	float					offsetY;

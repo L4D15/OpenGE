@@ -35,9 +35,6 @@ public:
 
     std::string         ToString();
 
-    static
-    luabind::scope      RegisterForScripting();
-
 public:
     float               x;
     float               y;

@@ -5,8 +5,8 @@
 #include "Engine/Core/GameObject.hpp"
 #include "Engine/Systems/SpriteRendering.hpp"
 #include "Engine/Systems/Physics.hpp"
-#include "Engine/Systems/ScriptProcessing.hpp"
 #include "Engine/Systems/Collisions.hpp"
+#include "Engine/Systems/LuaScripting.hpp"
 #include <string>
 #include <map>
 
@@ -31,11 +31,9 @@ public:
 	void						RenameGameObject(std::string name, std::string newName);
 	void						DeleteGameObject(std::string name);
 	GameObject&					Find(std::string name);
-    GameObject&                 Find(anax::Entity& entity) const;
+    GameObject&                 Find(const anax::Entity& entity) const;
 
 	std::string					ToString();
-
-    static luabind::scope       RegisterForScripting();
 
 public:
 	std::string					name;
@@ -49,9 +47,9 @@ private:
     // Basic Systems
     SpriteRendering             spriteRendering;
     Physics                     physics;
-    ScriptProcessing			scriptProcessing;
     Collisions                  collisions;
-	
+	LuaScripting				luaScripting;
+
 };
 
 #endif // OPENGE_SCENE_H
