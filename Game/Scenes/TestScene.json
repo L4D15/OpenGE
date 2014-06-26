@@ -26,7 +26,7 @@
         },
         {
 
-            "name": "object1",
+            "name": "Player",
             "components":
             [
                 {
@@ -63,6 +63,30 @@
                         "width": 128,
                         "height": 128
                     }
+                },
+                {
+                    "name": "LuaScript",
+                    "class": "PlayerController",
+                    "path": "Assets/Scripts/PlayerController.lua"
+                }
+            ]
+        },
+        {
+            "name": "Player2",
+            "components":
+            [
+                {
+                    "name": "Transform",
+                    "position":
+                    {
+                        "x": 600,
+                        "y": 400,
+                        "z": 0
+                    }
+                },
+                {
+                    "name": "SpriteRenderer",
+                    "sprite_path": "Assets/Sprites/template.png"
                 },
                 {
                     "name": "LuaScript",
