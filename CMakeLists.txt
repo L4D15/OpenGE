@@ -33,7 +33,8 @@ file(GLOB_RECURSE ENGINE_CORE_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Engine/
 file(GLOB_RECURSE ENGINE_COMPONENTS_SOURCE_FILES    "${CMAKE_SOURCE_DIR}/Engine/Components/*.*pp")
 file(GLOB_RECURSE ENGINE_SYSTEMS_SOURCE_FILES       "${CMAKE_SOURCE_DIR}/Engine/Systems/*.*pp")
 file(GLOB_RECURSE ENGINE_ASSETS_SOURCE_FILES        "${CMAKE_SOURCE_DIR}/Engine/Assets/*.*pp")
-file(GLOB_RECURSE GAME_SOURCE_FILES                 "${CMAKE_SOURCE_DIR}/Game/*.*pp")
+file(GLOB         GAME_SOURCE_FILES                 "${CMAKE_SOURCE_DIR}/Game/*.*pp")
+file(GLOB_RECURSE GAME_SCENES_SOURCE_FILES          "${CMAKE_SOURCE_DIR}/Game/Scenes/*.*pp")
 
 # ============================================================================= #
 # Include directories
@@ -121,7 +122,11 @@ set(INCLUDE_DIRECTORIES ${INCLUDE_DIRECTORIES} ${LUA_INCLUDE_DIRS} ${LUABIND_INC
 # ============================================================================= #
 
 # Images
-file(GLOB_RECURSE RESOURCE_SPRITES "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*")
+file(GLOB_RECURSE RESOURCE_SPRITES  "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*.png"
+                                    "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*.jpeg"
+                                    "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*.bmp"
+                                    "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*.tiff"
+                                    "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Sprites/*.json")
 
 # Scripts
 file(GLOB_RECURSE RESOURCE_SCRIPTS "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets/Scripts/*.lua")
@@ -144,7 +149,7 @@ if(APPLE)
         PROPERTIES
         MACOSX_PACKAGE_LOCATION "Resources/Scenes")
 else(APPLE)
-	file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
+    file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Assets" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
     file(COPY "${CMAKE_CURRENT_SOURCE_DIR}/Game/Scenes" DESTINATION "${CMAKE_CURRENT_BINARY_DIR}/bin")
 endif(APPLE)
 
@@ -154,7 +159,7 @@ endif(APPLE)
 include_directories(${INCLUDE_DIRECTORIES})
 
 if(APPLE)
-	set(MACOSX_BUNDLE true)
+    set(MACOSX_BUNDLE true)
     set(MACOSX_BUNDLE_BUNDLE_NAME ${PROJECT_NAME})
     set(MACOSX_BUNDLE_INFO_STRING "${PROJECT_NAME} ${VERSION_NUMBER}")
     set(MACOSX_BUNDLE_LONG_VERSION_STRING "${QUANTUM_VERSION_LONG}")
@@ -166,25 +171,42 @@ if(APPLE)
                                                     ${ENGINE_SYSTEMS_SOURCE_FILES}
                                                     ${ENGINE_ASSETS_SOURCE_FILES}
                                                     ${GAME_SOURCE_FILES}
+                                                    ${GAME_SCENES_SOURCE_FILES}
                                                     ${RESOURCE_SPRITES}
                                                     ${RESOURCE_SCRIPTS}
                                                     ${RESOURCE_SCENES})
 else(APPLE)
-	add_executable(${PROJECT_NAME}  ${ENGINE_CORE_SOURCE_FILES}
+    add_executable(${PROJECT_NAME}  ${ENGINE_CORE_SOURCE_FILES}
                                     ${ENGINE_COMPONENTS_SOURCE_FILES}
                                     ${ENGINE_SYSTEMS_SOURCE_FILES}
                                     ${ENGINE_ASSETS_SOURCE_FILES}
-                                    ${GAME_SOURCE_FILES})
+                                    ${GAME_SOURCE_FILES}
+                                    ${GAME_SCENES_SOURCE_FILES})
+
 endif(APPLE)
 
 target_link_libraries(  ${PROJECT_NAME}
-						${OPENGL_LIB}
+                        ${OPENGL_LIB}
                         ${OPENGL_LIBRARIES}
-						${SDL2_LIB}
-						${SDL2_IMAGE_LIB}
-						${SDL2_TTF_LIB}
+                        ${SDL2_LIB}
+                        ${SDL2_IMAGE_LIB}
+                        ${SDL2_TTF_LIB}
                         ${Boost_LIBRARIES}
                         anax
                         json_spirit
                         ${LUA_LIBRARIES}
                         ${LUABIND_LIBRARIES})
+
+# ============================================================================= #
+# Folder Structure
+# ============================================================================= #
+set_property( GLOBAL PROPERTY USE_FOLDERS ON)
+source_group("Engine\\Core" FILES ${ENGINE_CORE_SOURCE_FILES})
+source_group("Engine\\Components" FILES ${ENGINE_COMPONENTS_SOURCE_FILES})
+source_group("Engine\\Systems" FILES ${ENGINE_SYSTEMS_SOURCE_FILES})
+source_group("Engine\\Assets" FILES ${ENGINE_ASSETS_SOURCE_FILES})
+source_group("Game" FILES ${GAME_SOURCE_FILES})
+source_group("Game\\Scenes" FILES ${GAME_SCENES_SOURCE_FILES})
+source_group("Resources\\Scripts" FILES ${RESOURCE_SCRIPTS})
+source_group("Resources\\Sprites" FILES ${RESOURCE_SPRITES})
+source_group("Resources\\Scenes" FILES ${RESOURCE_SCENES})
