@@ -8,6 +8,8 @@ class Collisions : public anax::System<Collisions>
 public:
     Collisions();
     virtual ~Collisions();
+    
+    static void Block(anax::Entity& a, anax::Entity& b);
 
     void                    Update() const;
 

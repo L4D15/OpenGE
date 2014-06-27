@@ -27,6 +27,8 @@
 #include <sstream>
 #include <luabind/operator.hpp>
 
+lua_State* Systems::LuaScripting::luaState = NULL;
+
 using namespace Systems;
 
 LuaScripting::LuaScripting()

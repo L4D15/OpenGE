@@ -7,6 +7,7 @@ public:
 	Settings()
 	{
         maxFPS = 60;
+        debugMode = true;
 	}
 
 	~Settings()
@@ -16,6 +17,7 @@ public:
 
 public:
 	int				maxFPS;
+    bool            debugMode;
 	
 };
 
