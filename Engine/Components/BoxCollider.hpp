@@ -11,13 +11,13 @@ class BoxCollider : public anax::Component<BoxCollider>
 {
 public:
     BoxCollider()
-    : box(0.0, 0.0, 0.0, 0.0)
+    : box(0.0, 0.0, 0.0, 0.0), isTrigger(false)
     {
 
     }
 
     BoxCollider(float x, float y, float width, float height)
-    : box(x, y, width, height)
+    : box(x, y, width, height), isTrigger(false)
     {
 
     }
@@ -31,6 +31,7 @@ public:
 
 public:
     Box                 box;
+    bool                isTrigger;
 
 };
 

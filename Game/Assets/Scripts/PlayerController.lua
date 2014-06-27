@@ -30,5 +30,9 @@ function PlayerController(init)
         end
     end
 
+    function self.OnTrigger()
+        print(string.format("Triggered %s", triggered.name))
+    end
+
     return self
 end

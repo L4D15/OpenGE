@@ -18,7 +18,8 @@ BoxCollider::BoxCollider(json_spirit::Value jsonString)
 			{
 				"width": 1.0,
 				"height": 2.0
-			}
+			},
+            "isTrigger": false
 		}
 	*/
 
@@ -52,4 +53,13 @@ BoxCollider::BoxCollider(json_spirit::Value jsonString)
 	box.offsetY = y;
 	box.width = w;
 	box.height = h;
+    
+    if (jsonString.contains("isTrigger"))
+    {
+        isTrigger = jsonString.getObject().at("isTrigger").getBool();
+    }
+    else
+    {
+        isTrigger = false;
+    }
 }

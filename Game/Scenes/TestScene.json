@@ -58,10 +58,11 @@
                 },
                 {
                     "name": "BoxCollider",
+                    "isTrigger": true,
                     "dimensions":
                     {
-                        "width": 128,
-                        "height": 128
+                        "width": 48,
+                        "height": 64
                     }
                 },
                 {
@@ -72,7 +73,7 @@
             ]
         },
         {
-            "name": "Player2",
+            "name": "Trigger",
             "components":
             [
                 {
@@ -86,12 +87,16 @@
                 },
                 {
                     "name": "SpriteRenderer",
-                    "sprite_path": "Assets/Sprites/template.png"
+                    "sprite_path": "Assets/Sprites/Asteroids_Blue.png"
                 },
                 {
-                    "name": "LuaScript",
-                    "class": "PlayerController",
-                    "path": "Assets/Scripts/PlayerController.lua"
+                    "name": "BoxCollider",
+                    "isTrigger": true,
+                    "dimensions":
+                    {
+                        "width": 128,
+                        "height": 128
+                    }
                 }
             ]
         }

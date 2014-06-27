@@ -20,17 +20,19 @@ private:
     void RegisterClass(const std::string scriptPath);
     void RegisterObject(const anax::Entity& object);
     void CreateInstance(const std::string className, const anax::Entity& owner);
-    void RunFunction(const std::string function, const std::string className, const anax::Entity& owner);
+    
 
     void onEntityAdded(anax::Entity& entity);
     void onEntityRemoved(anax::Entity& entity);
-
+    
+public:
+    static void RunFunction(const std::string function, const std::string className, const anax::Entity& owner);
     template <class T>
-    void SetGlobal(const std::string name, const T& value);
+    static void SetGlobal(const std::string name, const T& value);
 
 
 protected:
-    lua_State*			luaState;
+    static lua_State*			luaState;
 
 };
 
