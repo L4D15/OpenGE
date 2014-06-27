@@ -58,6 +58,7 @@
                 },
                 {
                     "name": "BoxCollider",
+                    "isTrigger": true,
                     "dimensions":
                     {
                         "width": 48,

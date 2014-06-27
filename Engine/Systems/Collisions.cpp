@@ -40,10 +40,12 @@ void Collisions::Update() const
                     {
                         if (otherCollider.isTrigger)
                         {
+                            LuaScripting::SetGlobal<GameObject&>("triggered", Game::Find(other));
                             LuaScripting::RunFunction("OnTrigger", script.GetClass(), entity);
                         }
                         else
                         {
+                            LuaScripting::SetGlobal<GameObject&>("collided", Game::Find(other));
                             LuaScripting::RunFunction("OnCollision", script.GetClass(), entity);
                             Block(entity, other);
                         }

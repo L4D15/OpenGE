@@ -31,7 +31,7 @@ function PlayerController(init)
     end
 
     function self.OnTrigger()
-        print(string.format("Trigger from %s OnTrigger()", gameObject.name))
+        print(string.format("Triggered %s", triggered.name))
     end
 
     return self
