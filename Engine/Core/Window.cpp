@@ -18,7 +18,8 @@ Window::Window()
 
 Window::~Window()
 {
-	
+	SDL_DestroyWindow(window);
+    SDL_DestroyRenderer(renderer);
 }
 
 void Window::Show()

@@ -35,9 +35,14 @@ Game::~Game()
 	delete sceneManager;
 	delete resourceManager;
 	delete input;
-	delete window;
-	SDL_Quit();
+    
+    // TODO: Find why this throws a EXC_BAC_ACCESS
+    
+	//delete window;
 	TTF_Quit();
+    //SDL_Quit();
+    
+    // ---
 }
 
 /**
